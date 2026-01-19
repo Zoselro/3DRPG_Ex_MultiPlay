@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Camera_Ctrl : MonoBehaviour
 {
-     GameObject m_Player = null;
+    GameObject m_Player = null;
     Vector3 m_TargetPos = Vector3.zero;
 
     //--- 카메라 위치 계산용 변수

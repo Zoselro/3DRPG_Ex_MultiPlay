@@ -13,34 +13,34 @@ public class Hero_Ctrl : MonoBehaviour
     float m_MoveVelocity = 5.0f;  //평면 초당 이동 속도...
     //--- 캐릭터 이동 속도 변수
 
-    //--- Animator 관련 변수
-    Animator m_Animator = null;
-    AnimState m_PreState = AnimState.idle;
-    AnimState m_CurState = AnimState.idle;
-    //--- Animator 관련 변수
-
-    //--- JoyStick 이동 처리 변수
+    //--- Joystick 이동 처리 변수
     float m_JoyMvLen = 0.0f;
     Vector3 m_JoyMvDir = Vector3.zero;
-    //--- JoyStick 이동 처리 변수
-
-    //--- 이동 관련 공통 변수
-    Vector3 m_MoveDir = Vector3.zero; // x, z 평면 진행 방향
-    float m_RotSpeed = 7.0f;          // 초당 7도 회전하려는 속도
-    Quaternion m_TargetRot = Quaternion.identity; // 회전 계산용 변수
-    //--- 이동 관련 공통 변수
+    //--- Joystick 이동 처리 변수
 
     //--- Picking 관련 변수
     Ray m_MouseRay;
     RaycastHit hitInfo;
     public LayerMask LayerMask = -1;
 
-    bool m_IsPickMoveOnOff = false;     // 피킹 이동 OnOff
-    Vector3 m_TargetPos = Vector3.zero; // 최종 목표 위치
-    double m_MoveDurTime = 0;           // 목표점까지 도착하는데 걸리는 시간
-    double m_AddTimeCnt = 0;            // 누적 시간 카운트
-    Vector3 m_CacLenVec = Vector3.zero; // 이동 계산용 변수
+    bool m_IsPickMoveOnOff = false;     //피킹 이동 OnOff
+    Vector3 m_TargetPos = Vector3.zero; //최종 목표 위치
+    double m_MoveDurTime = 0;           //목표점까지 도착하는데 걸리는 시간
+    double m_AddTimeCount = 0;          //누적 시간 카운트
+    Vector3 m_CacLenVec = Vector3.zero; //이동 계산용 변수
     //--- Picking 관련 변수
+
+    //--- 이동 관련 공통 변수
+    Vector3 m_MoveDir = Vector3.zero;   //x, z 평면 진행 방향
+    float m_RotSpeed = 7.0f;            //초당 7도 회전하려는 속도
+    Quaternion m_TargetRot = Quaternion.identity; //회전 계산용 변수
+    //--- 이동 관련 공통 변수
+
+    //--- Animator 관련 변수
+    Animator m_Animator = null;
+    AnimState m_PreState = AnimState.idle;
+    AnimState m_CurState = AnimState.idle;
+    //--- Animator 관련 변수
 
     void Awake()
     {
@@ -49,15 +49,23 @@ public class Hero_Ctrl : MonoBehaviour
             a_CamCtrl.InitCamera(this.gameObject);
     }
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_Animator = this.GetComponent<Animator>(); 
+        GameMgr.Inst.m_RefHero = this;
+
+        m_Animator = this.GetComponent<Animator>();
     }
 
+    // Update is called once per frame
     void Update()
     {
+        MousePickCheck(); //<-- 마우스 클릭 바닥지형을 클릭했는지 확인하는 함수
+
         KeyBDMove();
-        JoyStickMoveUpdate();
+        JoyStickMvUpdate();
+        MousePickUpdate();
+
         UpdateAnimState(); //<-- idle 애니메이션으로 돌아가야 하는지 감시하는 함수
 
     }//void Update()
@@ -67,8 +75,10 @@ public class Hero_Ctrl : MonoBehaviour
         h = Input.GetAxisRaw("Horizontal"); //화살표키 좌우키를 누르면 -1.0f ~ 1.0f
         v = Input.GetAxisRaw("Vertical");
 
-        if(0.0f != h || 0.0f != v)
+        if (0.0f != h || 0.0f != v)
         {
+            ClearMsPickMove();
+
             m_KeyMvDir = new Vector3(h, 0.0f, v);
             //--- 카메라 좌표계를 기준으로 방향벡터를 계산해 주는 함수
             m_KeyMvDir = Camera.main.transform.TransformDirection(m_KeyMvDir);
@@ -95,58 +105,121 @@ public class Hero_Ctrl : MonoBehaviour
     public void SetJoyStickMv(Vector2 joyMvDir)
     {
         m_JoyMvLen = joyMvDir.magnitude;
-        if(0.0f < m_JoyMvLen)
+        if (0.0f < m_JoyMvLen)
         {
-            //--- 카메라가 바라보고 있는 전면을 기준으로 회전 시켜주는 코드
-            //new Vector3(joyMvDir.x, 0.0f, joyMvDir.y) 카메라의 로컬좌표 방향으로 변경하는 함수
-            m_JoyMvDir = Camera.main.transform.TransformDirection(new Vector3(joyMvDir.x, 0.0f, joyMvDir.y));
+            //마우스 피킹 이동 취소
+            ClearMsPickMove();
 
+            //--- 카메라가 바라보고 있는 전면을 기준으로 회전 시켜주는 코드
+            //new Vector3(joyMvDir.x, 0.0f, joyMvDir.y) 카메라의 로컬 기준 방향으로 변경하는 함수
+            m_JoyMvDir = Camera.main.transform.TransformDirection(
+                                new Vector3(joyMvDir.x, 0.0f, joyMvDir.y));
             m_JoyMvDir.y = 0.0f;
             m_JoyMvDir.Normalize();
             //--- 카메라가 바라보고 있는 전면을 기준으로 회전 시켜주는 코드
-        }
-    }
 
-    void JoyStickMoveUpdate()
+        }//if(0.0f < m_JoyMvLen)
+    }//public void SetJoyStickMv(Vector2 joyMvDir)
+
+    void JoyStickMvUpdate()
     {
-        //키보드 움직임이 있으면 조이스틱 움직임 취소
         if (0.0f != h || 0.0f != v)
             return;
 
         //--- 조이스틱 이동 처리
-        if(0.0f < m_JoyMvLen)
+        if (0.0f < m_JoyMvLen)
         {
             m_MoveDir = m_JoyMvDir;
 
             //--- 캐릭터 회전
-            if(0.0001f < m_JoyMvDir.magnitude)
+            if (0.0001f < m_JoyMvDir.magnitude)
             {
                 m_TargetRot = Quaternion.LookRotation(m_JoyMvDir);
                 transform.rotation = Quaternion.Slerp(transform.rotation,
-                    m_TargetRot, Time.deltaTime * m_RotSpeed);
-            }//--- 캐릭터 회전
+                                    m_TargetRot, Time.deltaTime * m_RotSpeed);
+            }
+            //--- 캐릭터 회전
 
             transform.position += m_JoyMvDir * (m_MoveVelocity * Time.deltaTime);
             ChangeAnimState(AnimState.move);
         }
+        //--- 조이스틱 이동 처리
+    }//void JoyStickMvUpdate()
+
+    void MousePickCheck()  //마우스 클릭 감지를 위한 함수
+    {
+        if (Input.GetMouseButtonDown(0) == true) //왼쪽 마우스 버튼 클릭시
+            if (GameMgr.Inst.IsPointerOverUIObject() == false) //UI가 아닌 곳을 클릭했을 때만 피킹
+            {
+                m_MouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(m_MouseRay, out hitInfo, Mathf.Infinity, LayerMask.value))
+                {
+                    //지형 바닥 피킹일 때
+                    MousePicking(hitInfo.point);
+                    GameMgr.Inst.MsClickMarkOn(hitInfo.point);
+                }
+            }//if(Input.GetMouseButtonDown(0) == true) //왼쪽 마우스 버튼 클릭시
+    }//void MousePickCheck()  //마우스 클릭 감지를 위한 함수
+
+    void MousePicking(Vector3 pickVec, GameObject pickMon = null)
+    {  //마우스 클릭 처리 함수
+        pickVec.y = transform.position.y;   //목표 위치
+
+        m_CacLenVec = pickVec - transform.position;
+        m_CacLenVec.y = 0.0f;
+
+        if (m_CacLenVec.magnitude < 0.5f) //너무 근거리 피킬은 스킵해 준다.
+            return;
+
+        m_TargetPos = pickVec;  //최종 목표 위치
+        m_IsPickMoveOnOff = true;   //피킬 이동 OnOff
+
+        m_MoveDir = m_CacLenVec.normalized;
+        m_MoveDurTime = m_CacLenVec.magnitude / m_MoveVelocity; //도착하는데까지 걸리는 시간
+        m_AddTimeCount = 0.0f;
     }
 
-    void MousePickCheck()  // 마우스 클릭 감지를 위한 함수
+    void MousePickUpdate()  //마우스 클릭으로 캐릭터 이동을 계산하는 함수
     {
-        if (Input.GetMouseButtonDown(0)) // 왼쪽 마우스 버튼 클릭시
+        if (m_IsPickMoveOnOff == true)
         {
+            m_CacLenVec = m_TargetPos - transform.position;
+            m_CacLenVec.y = 0.0f;
 
-        }
-    }
+            m_MoveDir = m_CacLenVec.normalized;
 
-    void MousePicking(Vector3 pickVec, GameObject pickMon = null) // 마우스 클릭 처리 함수
+            //캐릭터를 이동방향으로 회전시키는 코드
+            if (0.0001f < m_CacLenVec.magnitude)
+            {
+                m_TargetRot = Quaternion.LookRotation(m_MoveDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation,
+                                    m_TargetRot, Time.deltaTime * m_RotSpeed);
+            }
+            //캐릭터를 이동방향으로 회전시키는 코드
+
+            m_AddTimeCount += Time.deltaTime;
+            if (m_MoveDurTime <= m_AddTimeCount) //목표점에 도착한 것으로 판정한다.
+            {
+                //m_IsPickMoveOnOff = false; //마우스 클릭 이동 취소
+                ClearMsPickMove();
+            }
+            else
+            {
+                transform.position += m_MoveDir * Time.deltaTime * m_MoveVelocity;
+                ChangeAnimState(AnimState.move);
+            }
+
+        }//if(m_IsPickMoveOnOff == true)
+    }//void MousePickUpdate()
+
+    void ClearMsPickMove()
     {
+        m_IsPickMoveOnOff = false; //마우스 클릭 이동 취소
 
-    }
-
-    void MousePickUpdate() // 마우스 클릭으로 캐릭터 이동을 계산하는 함수
-    {
-
+        //마우스 클릭 마크 취소
+        if (GameMgr.Inst.m_MsClickMark != null)
+            GameMgr.Inst.m_MsClickMark.SetActive(false);
     }
 
     //--- 애니메이션 상태 변경 메서드
@@ -156,13 +229,13 @@ public class Hero_Ctrl : MonoBehaviour
         if (m_Animator == null)
             return;
 
-        if(m_PreState == newState)
+        if (m_PreState == newState)
             return;
 
         m_Animator.ResetTrigger(m_PreState.ToString());
         //기존에 적용되어 있던 Trigger 변수를 제거
 
-        if(0.0f < crossTime)
+        if (0.0f < crossTime)
         {
             m_Animator.SetTrigger(newState.ToString());
         }
@@ -181,9 +254,69 @@ public class Hero_Ctrl : MonoBehaviour
     void UpdateAnimState()
     {
         //키보드, 조이스틱, 마우스 피킹 이동중이 아닐 때는 아이들 동작으로 돌아가게 한다.
-        if( (0 == h && 0 == v) && m_JoyMvLen <= 0.0f )
+        if ((0 == h && 0 == v) && m_JoyMvLen <= 0.0f &&
+            m_IsPickMoveOnOff == false && IsAttack() == false)
         {
             ChangeAnimState(AnimState.idle);
         }
     }//void UpdateAnimState()
-}
+
+    //주인공 입장에서 주변 공격거리안쪽에 몬스터가 존재하는지 확인하는 함수
+    bool IsTargetEnemyActive(float ExtLen = 0.0f) //ExtLen : 확장 거리 값
+    {
+        return false;
+    }
+
+    //현재 공격 중인지 확인하는 메서드
+    public bool IsAttack()
+    {
+        return m_CurState == AnimState.attack || m_CurState == AnimState.skill;
+    }
+
+    public void AttackOrder()
+    {
+        if (IsAttack() == false)  //공격중이거나 스킬 사용중이 아닐 때만... 
+        {
+            //키보드 컨트롤이나 조이스킬 컨트롤로 이동 중이고
+            //공격키를 연타해서 누르면 달리는 애니메이션에 잠깐동안
+            //애니메이션 보간 때문에 공격 애니가 끼어드는 문제가 발생한다.
+            //<-- 이런 현상에 대한 예외처리
+            if ((0.0f != h || 0.0f != v) || 0.0f < m_JoyMvLen)
+                return;
+
+            ChangeAnimState(AnimState.attack);
+            ClearMsPickMove();
+
+        }//if(IsAttack() == false)  //공격중이거나 스킬 사용중이 아닐 때만... 
+    }//public void AttackOrder()
+
+    #region --- 이벤트 함수
+
+    public void Event_AttHit()
+    {
+
+    }
+
+    void Event_AttFinish()
+    {
+        //Attack 상태일 때는 Attack상태로 끝나야 한다.
+        if (m_CurState != AnimState.attack)
+            return;
+
+        if(IsTargetEnemyActive(0.2f) == true)
+        {
+            ChangeAnimState(AnimState.attack);
+            ClearMsPickMove();
+        }
+        else
+        {
+            ChangeAnimState(AnimState.idle);
+        }
+    }//void Event_AttFinish()
+
+    #endregion
+
+
+
+
+}//public class Hero_Ctrl : MonoBehaviour

@@ -25,6 +25,7 @@ public class Joystick_Mgr : MonoBehaviour
     }
     //--- 싱글턴 패턴
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (m_Js_Background == null || m_Js_Handle == null ||
@@ -37,23 +38,20 @@ public class Joystick_Mgr : MonoBehaviour
             m_Js_Background.SetActive(true);
         }
         else if(m_JoystickType == JoystickType.Flexible ||
-            m_JoystickType == JoystickType.FlexibleOnOff)
+                m_JoystickType == JoystickType.FlexibleOnOff)
         {
             m_JoystickPickPanel.SetActive(true);
-            if(m_JoystickType == JoystickType.FlexibleOnOff)
-            {
+            if (m_JoystickType == JoystickType.FlexibleOnOff)
                 m_Js_Background.SetActive(false);
-            }
 
             var VJoystickSc = m_Js_Background.GetComponent<Fixed_Joystick>();
             if(VJoystickSc != null)
-            {
-                Destroy(VJoystickSc);
-            }
+                Destroy(VJoystickSc);   //스크립트 자체를 제거함
 
             m_Js_Background.GetComponent<Image>().raycastTarget = false;
         }
-    }
+
+    }//void Start()
 
     // Update is called once per frame
     void Update()
