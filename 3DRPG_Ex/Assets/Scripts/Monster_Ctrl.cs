@@ -40,6 +40,9 @@ public class Monster_Ctrl : MonoBehaviour
     float m_MoveVelocity = 2.0f;        //평면 초당 이동 속도
     //--- Monster AI
 
+    float m_CacRate = 0.0f;
+    float m_NormalTime = 0.0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -143,7 +146,11 @@ public class Monster_Ctrl : MonoBehaviour
                     transform.rotation = Quaternion.Slerp(transform.rotation,
                                     m_TargetRot, Time.deltaTime * m_RotSpeed);
                 }//if(0.0001f < m_CacDist) //m_MoveDir.magnitude
-                 //--- 몬스터 이동시 이동방향쪽을 회전 시켜주는 코드
+                //--- 몬스터 이동시 이동방향쪽을 회전 시켜주는 코드
+
+                //아직 공격 애니메이션 중이면 공격 애니가 끝난 경우에만 추적 이동하도록...
+                if (IsAttackAnim() == true)
+                    return;
 
                 //--- 몬스터 이동 코드
                 m_MoveNextStep = m_MoveDir * (m_MoveVelocity * Time.deltaTime);
@@ -188,5 +195,31 @@ public class Monster_Ctrl : MonoBehaviour
         m_CurState = newState;
 
     }//void MyChnageAnim(AnimState newState, float CrossTime = 0.0f)
+
+    bool IsAttackAnim()  //현재 공격 애니메이션 중인지 확인하는 함수
+    {
+        if(m_RefAnimation != null)
+        {
+            if(m_RefAnimation.IsPlaying(anim.Attack1.name) == true)
+            {
+                m_NormalTime = m_RefAnimation[anim.Attack1.name].time
+                               / m_RefAnimation[anim.Attack1.name].length;
+
+                //m_RefAnimation[anim.Attack1.name].time
+                //어느 정도 플레이가 되고 있는지의 현재 시간값
+                //m_RefAnimation[anim.Attack1.name].length
+                //한동작이 끝날 때까지의 시간값
+
+                //소수점 한동작이 몇프로 진행 되었는지 계산 변수
+                m_CacRate = m_NormalTime - (int)m_NormalTime;
+
+                //공격 애니메이션 끝부분이 아닐 때 (공격애니메이션 중이라는 뜻)
+                if (m_CacRate < 0.95f)
+                    return true;
+            }
+        }//if(m_RefAnimation != null)
+
+        return false;
+    }//bool IsAttackAnim() 
 
 }//public class Monster_Ctrl 

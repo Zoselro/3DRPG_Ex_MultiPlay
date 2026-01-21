@@ -42,6 +42,16 @@ public class Hero_Ctrl : MonoBehaviour
     AnimState m_CurState = AnimState.idle;
     //--- Animator 관련 변수
 
+    //--- 공격 관련 변수
+    GameObject[] m_EnemyList = null;    //필드상의 몬스터들을 가져오기 위한 변수
+    float m_AttackDist = 1.9f;          //주인공의 공격거리
+    GameObject m_TargetEnemy = null;    //공격 대상 몬스터 객체 참조 변수
+    Vector3 m_CacTgVec = Vector3.zero;  //타겟까지의 거리 계산용 변수
+    Vector3 m_CacAtDir = Vector3.zero;  //공격시 방향 전환용 변수
+
+    float m_CacRotSpeed = 7.0f;
+    //--- 공격 관련 변수
+
     void Awake()
     {
         Camera_Ctrl a_CamCtrl = Camera.main.GetComponent<Camera_Ctrl>();
@@ -62,9 +72,13 @@ public class Hero_Ctrl : MonoBehaviour
     {
         MousePickCheck(); //<-- 마우스 클릭 바닥지형을 클릭했는지 확인하는 함수
 
+        FindEnemyTarget();
+
         KeyBDMove();
         JoyStickMvUpdate();
         MousePickUpdate();
+
+        AttackRotUpdate();
 
         UpdateAnimState(); //<-- idle 애니메이션으로 돌아가야 하는지 감시하는 함수
 
@@ -261,11 +275,7 @@ public class Hero_Ctrl : MonoBehaviour
         }
     }//void UpdateAnimState()
 
-    //주인공 입장에서 주변 공격거리안쪽에 몬스터가 존재하는지 확인하는 함수
-    bool IsTargetEnemyActive(float ExtLen = 0.0f) //ExtLen : 확장 거리 값
-    {
-        return false;
-    }
+ 
 
     //현재 공격 중인지 확인하는 메서드
     public bool IsAttack()
@@ -291,6 +301,104 @@ public class Hero_Ctrl : MonoBehaviour
     }//public void AttackOrder()
 
     #region --- 이벤트 함수
+
+    //공격 타겟을 찾아주는 함수
+    void FindEnemyTarget()
+    {
+        //마우스 피킬을 시도했고 이동 중이면 타겟을 다시 잡지 않는다.
+        if (m_IsPickMoveOnOff == true)
+            return;
+
+        //애니메이션 보간 때문에 정확히 정밀한 공격 애니메이션만 하고 있을 때만...
+        if (IsAttack() == false) //공격 애니메이션이 아니면...
+            return;
+
+        //타겟의 교체는 공격거리보다는 조금 더 여유(0.5f)를 두고 바뀌게 한다.
+        if (IsTargetEnemyActive(0.5f) == true)
+            return; //(공격거리 + 0.5) >= 주인공에서 타겟몬스터까지의 거리 (아직 타겟이 유효하면...)
+
+        //공격 애니메이션 중이고 타겟이 무효화 되었으면... 타겟을 새로 잡아준다.
+
+        m_EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
+
+        float minLen = float.MaxValue;
+        float eCount = m_EnemyList.Length;
+        m_TargetEnemy = null;   //우선 타겟 무효화
+        for(int i = 0; i < eCount; i++) 
+        {
+            m_CacTgVec = m_EnemyList[i].transform.position - transform.position;
+            m_CacTgVec.y = 0.0f;
+            if(m_CacTgVec.magnitude <= m_AttackDist)
+            { //공격거리 안쪽에 있을 경우만 타겟으로 잡는다.
+                if(m_CacTgVec.magnitude < minLen)
+                {
+                    minLen = m_CacTgVec.magnitude;
+                    m_TargetEnemy = m_EnemyList[i];
+                }//if(m_CacTgVec.magnitude < minLen)
+            }//if(m_CacTgVec.magnitude <= m_AttackDist)
+        }//for(int i = 0; i < eCount; i++) 
+
+    }//void FindEnemyTarget()
+
+    //주인공 입장에서 주변 공격거리안쪽에 몬스터가 존재하는지 확인하는 함수
+    bool IsTargetEnemyActive(float ExtLen = 0.0f) //ExtLen : 확장 거리 값
+    {
+        if (m_TargetEnemy == null)
+            return false;
+
+        //타겟이 활성화되어 있지 않으면 타겟 해제
+        if(m_TargetEnemy.activeSelf == false)
+        {
+            m_TargetEnemy = null;
+            return false;
+        }
+
+        //isDie 죽어 있어도
+        Monster_Ctrl tMon = m_TargetEnemy.GetComponent<Monster_Ctrl>();
+        if(tMon.m_CurState == AnimState.die) //죽었으면...
+        {
+            m_TargetEnemy = null;
+            return false;
+        }
+
+        m_CacTgVec = m_TargetEnemy.transform.position - transform.position;
+        m_CacTgVec.y = 0.0f;
+        if(m_AttackDist + ExtLen < m_CacTgVec.magnitude)
+        {  //(공격거리 + 검색 확장거리) 바깥쪽에 있을 경우도 타겟을 무효화 해 버린다.
+            //m_TargetEnemy = null; //원거리인 경우 타겟을 공격할 수 있으니까...
+            return false;
+        }
+
+        return true; //타겟이 아직 유효 하다는 의미
+
+    }//bool IsTargetEnemyActive(float ExtLen = 0.0f)  //ExtLen : 확장 거리 값
+
+    public void AttackRotUpdate()
+    { //공격애니메이션 중일 때 타겟을 향해 회전하게 하는 함수
+
+        //키보드 이동, 조이스틱 이동을 발동시켰다면 타겟은 즉시 무효화 처리
+        if ((0.0f != h || 0.0f != v) || 0.0f < m_JoyMvLen)
+            m_TargetEnemy = null;   //타겟 무효화
+
+        if (m_TargetEnemy == null)  //타겟이 존재하지 않으면...
+            return;
+
+        m_CacTgVec = m_TargetEnemy.transform.position - transform.position;
+        m_CacTgVec.y = 0.0f;
+
+        if(m_CacTgVec.magnitude <= (m_AttackDist + 0.3f)) //공격거리 안쪽이면..
+        {
+            m_CacAtDir = m_CacTgVec.normalized;
+            if(0.0001f < m_CacAtDir.magnitude)
+            {
+                m_CacRotSpeed = m_RotSpeed * 3.0f;  //초당 회전 속도
+                Quaternion a_TargetRot = Quaternion.LookRotation(m_CacAtDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation,
+                                    a_TargetRot, Time.deltaTime * m_CacRotSpeed);
+            }//if(0.0001f < m_CacAtDir.magnitude)
+        }//if(m_CacTgVec.magnitude <= (m_AttackDist + 0.3f)) //공격거리 안쪽이면..
+
+    }//public void AttackRotUpdate()
 
     public void Event_AttHit()
     {
