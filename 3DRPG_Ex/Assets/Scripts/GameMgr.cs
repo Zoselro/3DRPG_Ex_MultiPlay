@@ -17,6 +17,14 @@ public class GameMgr : MonoBehaviour
     public Button m_Attack_Btn = null;
     public Button m_Skill_Btn  = null;
 
+    [Header("--- Damage Text ---")]
+    public Transform m_DText_Canvas_W = null;
+    public GameObject m_DTextPrefab_W = null;
+
+    [Header("--- Shader ---")]
+    public Shader g_AddTexShader = null;    //주인공 데미지 연출용(빨간색으로 변했다 돌아올 때)
+    public Shader g_VertexLitShader = null; //몬스터 사망시 투명하게 사라지게 하기 용
+
     //--- 싱글턴 패턴을 위한 인스턴스 변수 선언
     public static GameMgr Inst = null;
 
@@ -77,6 +85,38 @@ public class GameMgr : MonoBehaviour
             m_MsClickMark.SetActive(false);
 
     }//void MsOffObserver()
+
+    public void SpawnDText_W(int dmg, Vector3 spPos, int colorInx = 0)
+    {
+        if (m_DTextPrefab_W == null || m_DText_Canvas_W == null)
+            return;
+
+        GameObject dmgObj = Instantiate(m_DTextPrefab_W);
+
+        if(colorInx == 1) //주인공인 경우
+        {
+            if(m_RefHero != null)
+            {
+                Canvas fCanvas = m_RefHero.GetComponentInChildren<Canvas>();
+                if(fCanvas != null)
+                    dmgObj.transform.SetParent(fCanvas.transform);
+            }//if(m_RefHero != null)
+        }//if(colorInx == 1) //주인공인 경우
+        else //몬스터인 경우
+        {
+            dmgObj.transform.SetParent(m_DText_Canvas_W);
+        }
+
+        DamageText_W damageTx = dmgObj.GetComponentInChildren<DamageText_W>();
+        if(damageTx != null)
+        {
+            if (colorInx == 1) //주인공인 경우
+                damageTx.InitState(-dmg, spPos, new Color32(255, 255, 230, 255), false);
+            else
+                damageTx.InitState(-dmg, spPos, new Color32(255, 255, 255, 255));
+        }//if(damageTx != null)
+
+    }//public void SpawnDText_W(int dmg, Vector3 a_SpPos, int a_ColorIdx = 0)
 
     public bool IsPointerOverUIObject()
     {   //마우스가 UI를 위에 있는지? 아닌지? 를 확인 하는 함수

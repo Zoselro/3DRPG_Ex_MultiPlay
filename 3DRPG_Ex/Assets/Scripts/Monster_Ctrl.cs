@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MonType
 {
@@ -16,6 +16,7 @@ public class Monster_Ctrl : MonoBehaviour
     float CurHp = 100;
     float MaxHp = 100;
     float NetHp = 100;  //CurHp 중계용
+    public Image ImgHpbar;
     //--- Hp 바 표시
 
     AnimState m_PreState = AnimState.idle; //애니메이션 변경을 위한 함수 
@@ -221,5 +222,46 @@ public class Monster_Ctrl : MonoBehaviour
 
         return false;
     }//bool IsAttackAnim() 
+
+    public void TakeDamage(GameObject Attacker, float Damage = 10.0f)
+    {
+        if (CurHp <= 0.0f)
+            return;
+
+        CurHp -= Damage;
+        if(CurHp < 0.0f)
+           CurHp = 0.0f;
+
+        ImgHpbar.fillAmount = CurHp / MaxHp;
+
+        Vector3 cacPos = this.transform.position;
+        cacPos.y += 2.65f;
+        GameMgr.Inst.SpawnDText_W((int)Damage, cacPos);
+
+        if(CurHp <= 0.0f) //사망처리
+        {
+            Destroy(gameObject);
+        }
+    }//public void TakeDamage(GameObject Attacker, float Damage = 10.0f)
+
+    public void Event_AttHit() //공격 애니에니션에서 데미지가 들어가는 시점에 호출되는 함수
+    {
+        if (m_AggroTarget == null)
+            return;
+
+        Vector3 distVec = m_AggroTarget.transform.position - transform.position;
+        float cacLen = distVec.magnitude;
+        distVec.y = 0.0f;
+
+        //공격각도 안에 있는 경우
+        if (Vector3.Dot(transform.forward, distVec.normalized) < 0.0f)
+            return;  //90도를 넘는 범위에 있다는 뜻
+
+        if ((m_AttackDist + 1.7f) < cacLen)
+            return;
+
+        m_AggroTarget.GetComponent<Hero_Ctrl>().TakeDamage(10);
+
+    }//public void Event_AttHit() //공격 애니에니션에서 데미지가 들어가는 시점에 호출되는 함수
 
 }//public class Monster_Ctrl 

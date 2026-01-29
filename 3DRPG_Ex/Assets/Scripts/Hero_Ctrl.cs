@@ -1,7 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hero_Ctrl : MonoBehaviour
 {
+    //--- Hp 바 표시
+    [HideInInspector] public float CurHp = 1000;
+    [HideInInspector] public float MaxHp = 1000;
+    float NetHp = 1000; //CurHp 중계용
+    public Image ImgHpbar;
+    //--- Hp 바 표시
+    public Text NickNameText;
+
     //--- 키보드 이동 관련 변수 선언
     float h = 0, v = 0;
     Vector3 m_KeyMvDir = Vector3.zero;
@@ -52,6 +61,22 @@ public class Hero_Ctrl : MonoBehaviour
     float m_CacRotSpeed = 7.0f;
     //--- 공격 관련 변수
 
+    //--- 데미지 칼라 연출 관련 변수
+    Shader m_DefTexShader = null;
+    Shader m_WeaponTexShader = null;
+
+    bool AttachColorChange = false;
+    SkinnedMeshRenderer m_SMR = null;
+    SkinnedMeshRenderer[] m_SMRList = null;
+    MeshRenderer[] m_MeshList = null;   //장착 무기
+    float AttachColorStartTime = 0.0f;
+    float AttachColorTime = 0.1f;       //피격을 짧게 주기용
+    float m_Ratio = 0.0f;
+    float m_fCol  = 0.0f;
+    float m_DamageColor = 0.63f;
+    Color m_CacColor;
+    //--- 데미지 칼라 연출 관련 변수
+
     void Awake()
     {
         Camera_Ctrl a_CamCtrl = Camera.main.GetComponent<Camera_Ctrl>();
@@ -65,7 +90,13 @@ public class Hero_Ctrl : MonoBehaviour
         GameMgr.Inst.m_RefHero = this;
 
         m_Animator = this.GetComponent<Animator>();
-    }
+
+        //LayerMask = 1 << LayerMask.NameToLayer("MyTerrain");
+        //LayerMask |= 1 << LayerMask.NameToLayer("Enemy");  //Enemy 레이어도 피킹이 되도록 설정
+
+        FindDefShader();
+
+    }//void Start()
 
     // Update is called once per frame
     void Update()
@@ -81,6 +112,8 @@ public class Hero_Ctrl : MonoBehaviour
         AttackRotUpdate();
 
         UpdateAnimState(); //<-- idle 애니메이션으로 돌아가야 하는지 감시하는 함수
+
+        AttachColorUpdate();
 
     }//void Update()
 
@@ -169,10 +202,21 @@ public class Hero_Ctrl : MonoBehaviour
 
                 if (Physics.Raycast(m_MouseRay, out hitInfo, Mathf.Infinity, LayerMask.value))
                 {
-                    //지형 바닥 피킹일 때
-                    MousePicking(hitInfo.point);
-                    GameMgr.Inst.MsClickMarkOn(hitInfo.point);
-                }
+                    if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                    {  //마루스로 몬스터를 피킹 했다면...
+                        MousePicking(hitInfo.point, hitInfo.collider.gameObject);
+
+                        if (GameMgr.Inst.m_MsClickMark != null)
+                            GameMgr.Inst.m_MsClickMark.SetActive(false);
+                    }
+                    else //지형 바닥 피킹일 때
+                    {
+                        //지형 바닥 피킹일 때
+                        MousePicking(hitInfo.point);
+                        GameMgr.Inst.MsClickMarkOn(hitInfo.point);
+                    }//else //지형 바닥 피킹일 때
+
+                }//if (Physics.Raycast(m_MouseRay, out hitInfo, Mathf.Infinity, LayerMask.value))
             }//if(Input.GetMouseButtonDown(0) == true) //왼쪽 마우스 버튼 클릭시
     }//void MousePickCheck()  //마우스 클릭 감지를 위한 함수
 
@@ -183,6 +227,29 @@ public class Hero_Ctrl : MonoBehaviour
         m_CacLenVec = pickVec - transform.position;
         m_CacLenVec.y = 0.0f;
 
+        //--- Picking Enemy 공격 처리 부분
+        if(pickMon != null)
+        {
+            //지금 공격하려고 하는 몬스터의 어그로 타겟이 나라면...
+            //공격 가시거리... 타겟이 있고, +1.0이면 어차피 몬스터도 다가올거고,
+            //좀 일찍 공격 애니메이션에 들어가야 잠시라도 move 애니가 끼어 들지 못한다.
+            float attDist = m_AttackDist;
+            if(pickMon.GetComponent<Monster_Ctrl>().m_AggroTarget == this.gameObject)
+            {
+                attDist = m_AttackDist + 0.1f;
+            }
+
+            m_CacTgVec = pickMon.transform.position - transform.position;
+            if(m_CacTgVec.magnitude <= attDist)
+            {
+                m_TargetEnemy = pickMon;
+                AttackOrder();  //즉시공격
+
+                return;
+            }
+        }//if(a_PickMon != null)
+        //--- Picking Enemy 공격 처리 부분
+
         if (m_CacLenVec.magnitude < 0.5f) //너무 근거리 피킬은 스킵해 준다.
             return;
 
@@ -192,7 +259,10 @@ public class Hero_Ctrl : MonoBehaviour
         m_MoveDir = m_CacLenVec.normalized;
         m_MoveDurTime = m_CacLenVec.magnitude / m_MoveVelocity; //도착하는데까지 걸리는 시간
         m_AddTimeCount = 0.0f;
-    }
+
+        m_TargetEnemy = pickMon;
+
+    }//void MousePicking(Vector3 pickVec, GameObject pickMon = null)
 
     void MousePickUpdate()  //마우스 클릭으로 캐릭터 이동을 계산하는 함수
     {
@@ -223,6 +293,15 @@ public class Hero_Ctrl : MonoBehaviour
                 transform.position += m_MoveDir * Time.deltaTime * m_MoveVelocity;
                 ChangeAnimState(AnimState.move);
             }
+
+            //--- 타겟을 향해 피킹 이동 공격
+            if (m_TargetEnemy != null)
+            {
+                m_CacTgVec = m_TargetEnemy.transform.position - transform.position;
+                if (m_CacTgVec.magnitude <= m_AttackDist) //공격거리 안쪽에 들어왔다면...
+                    AttackOrder();
+            }
+            //--- 타겟을 향해 피킹 이동 공격
 
         }//if(m_IsPickMoveOnOff == true)
     }//void MousePickUpdate()
@@ -402,8 +481,33 @@ public class Hero_Ctrl : MonoBehaviour
 
     public void Event_AttHit()
     {
+        m_EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
+        int iCount = m_EnemyList.Length;
+        float fCacLen = 0.0f;
+        GameObject effObj = null;
+        Vector3 effPos = Vector3.zero;
 
-    }
+        //--- 주변 모든 몬스터를 찾아서 데미지를 준다.(범위 공격)
+        for(int i = 0; i < iCount; i++)
+        {
+            m_CacTgVec = m_EnemyList[i].transform.position - transform.position;
+            fCacLen = m_CacTgVec.magnitude;
+            m_CacTgVec.y = 0.0f;
+
+            //공격각도 안에 있는 경우
+            //45도 정도 범위 밖에 있다면 뜻
+            if(Vector3.Dot(transform.forward, m_CacTgVec.normalized) < 0.45f)
+                continue;
+
+            //공격 거리 밖에 있는 경우
+            if (m_AttackDist + 0.1f < fCacLen)
+                continue;
+
+            m_EnemyList[i].GetComponent<Monster_Ctrl>().TakeDamage(this.gameObject);
+        }
+        //--- 주변 모든 몬스터를 찾아서 데미지를 준다.(범위 공격)
+
+    }//public void Event_AttHit()
 
     void Event_AttFinish()
     {
@@ -424,7 +528,121 @@ public class Hero_Ctrl : MonoBehaviour
 
     #endregion
 
+    public void TakeDamage(float Damage = 10.0f)
+    {
+        if (CurHp <= 0.0f)
+            return;
 
+        CurHp -= Damage;
+        if(CurHp < 0.0f)
+           CurHp = 0.0f;
 
+        ImgHpbar.fillAmount = CurHp / MaxHp;
+
+        SetAttachColor();
+
+        Vector3 cacPos = this.transform.position;
+        cacPos.y += 2.65f;
+        GameMgr.Inst.SpawnDText_W((int)Damage, cacPos, 1);
+
+        if (CurHp <= 0.0f)
+        {
+            Die();   //사망처리
+        }
+
+    }//public void TakeDamage(float Damage = 10.0f)
+
+    void Die()
+    {
+        //나중 처리
+    }
+
+    void FindDefShader()
+    {
+        if(m_SMR == null)
+        {
+            m_SMRList = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            m_MeshList = gameObject.GetComponentsInChildren<MeshRenderer>();
+            m_SMR = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+
+            if (m_SMR != null)
+                m_DefTexShader = m_SMR.material.shader;
+
+            if(0 < m_MeshList.Length)
+                m_WeaponTexShader = m_MeshList[0].material.shader;
+        }//if(m_SMR == null)
+
+    }//void FindDefShader()
+
+    void SetAttachColor()
+    {
+        AttachColorChange = true;
+        AttachColorStartTime = Time.time;
+    }
+
+    void AttachColorUpdate()
+    {
+        if (this.gameObject.activeSelf == false)
+            return;
+
+        if (AttachColorChange == false)
+            return;
+
+        FindDefShader();
+
+        m_Ratio = (Time.time - AttachColorStartTime) / AttachColorTime;
+        m_Ratio = Mathf.Min(m_Ratio, 1.0f);
+        m_fCol = m_DamageColor;
+        m_CacColor = new Color(m_fCol, m_fCol, m_fCol);
+
+        if(1.0f <= m_Ratio)
+        {
+            for(int i = 0; i < m_SMRList.Length; i++)
+            {
+                if(m_DefTexShader != null)
+                   m_SMRList[i].material.shader = m_DefTexShader;
+            }
+
+            //--- 무기
+            if(m_MeshList != null)
+            {
+                for(int i = 0; i < m_MeshList.Length; i++)
+                {
+                    if (m_WeaponTexShader != null)
+                        m_MeshList[i].material.shader = m_WeaponTexShader;
+                }
+            }
+            //--- 무기
+
+            AttachColorChange = false;
+        }//if(1.0f <= m_Ratio)
+        else //if(m_Ratio < 1.0f)
+        {
+            for(int i = 0; i < m_SMRList.Length; i++)
+            {
+                if (GameMgr.Inst.g_AddTexShader != null &&
+                    m_SMRList[i].material.shader != GameMgr.Inst.g_AddTexShader)
+                    m_SMRList[i].material.shader = GameMgr.Inst.g_AddTexShader;
+
+                m_SMRList[i].material.SetColor("_AddColor", m_CacColor);
+            }
+
+            //--- 무기
+            if(m_MeshList != null)
+            {
+                for(int i = 0; i < m_MeshList.Length; i++)
+                {
+                    if(GameMgr.Inst.g_AddTexShader != null &&
+                        m_MeshList[i].material.shader != GameMgr.Inst.g_AddTexShader)
+                        m_MeshList[i].material.shader = GameMgr.Inst.g_AddTexShader;
+
+                    m_MeshList[i].material.SetColor("_AddColor", m_CacColor);
+                }
+            }
+            //--- 무기
+
+        }//else //if(m_Ratio < 1.0f)
+
+    }//void AttachColorUpdate()
 
 }//public class Hero_Ctrl : MonoBehaviour
