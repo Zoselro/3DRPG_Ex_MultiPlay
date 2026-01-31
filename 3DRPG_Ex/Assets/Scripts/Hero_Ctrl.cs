@@ -124,6 +124,9 @@ public class Hero_Ctrl : MonoBehaviour
 
         if (0.0f != h || 0.0f != v)
         {
+            if (IsSkill() == true)
+                return;
+
             ClearMsPickMove();
 
             m_KeyMvDir = new Vector3(h, 0.0f, v);
@@ -176,6 +179,9 @@ public class Hero_Ctrl : MonoBehaviour
         //--- 조이스틱 이동 처리
         if (0.0f < m_JoyMvLen)
         {
+            if (IsSkill() == true)
+                return;
+
             m_MoveDir = m_JoyMvDir;
 
             //--- 캐릭터 회전
@@ -196,28 +202,31 @@ public class Hero_Ctrl : MonoBehaviour
     void MousePickCheck()  //마우스 클릭 감지를 위한 함수
     {
         if (Input.GetMouseButtonDown(0) == true) //왼쪽 마우스 버튼 클릭시
-            if (GameMgr.Inst.IsPointerOverUIObject() == false) //UI가 아닌 곳을 클릭했을 때만 피킹
+        if (GameMgr.Inst.IsPointerOverUIObject() == false) //UI가 아닌 곳을 클릭했을 때만 피킹
+        {
+            if(IsSkill() == true)
+               return;
+
+            m_MouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(m_MouseRay, out hitInfo, Mathf.Infinity, LayerMask.value))
             {
-                m_MouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {  //마루스로 몬스터를 피킹 했다면...
+                    MousePicking(hitInfo.point, hitInfo.collider.gameObject);
 
-                if (Physics.Raycast(m_MouseRay, out hitInfo, Mathf.Infinity, LayerMask.value))
+                    if (GameMgr.Inst.m_MsClickMark != null)
+                        GameMgr.Inst.m_MsClickMark.SetActive(false);
+                }
+                else //지형 바닥 피킹일 때
                 {
-                    if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-                    {  //마루스로 몬스터를 피킹 했다면...
-                        MousePicking(hitInfo.point, hitInfo.collider.gameObject);
+                    //지형 바닥 피킹일 때
+                    MousePicking(hitInfo.point);
+                    GameMgr.Inst.MsClickMarkOn(hitInfo.point);
+                }//else //지형 바닥 피킹일 때
 
-                        if (GameMgr.Inst.m_MsClickMark != null)
-                            GameMgr.Inst.m_MsClickMark.SetActive(false);
-                    }
-                    else //지형 바닥 피킹일 때
-                    {
-                        //지형 바닥 피킹일 때
-                        MousePicking(hitInfo.point);
-                        GameMgr.Inst.MsClickMarkOn(hitInfo.point);
-                    }//else //지형 바닥 피킹일 때
-
-                }//if (Physics.Raycast(m_MouseRay, out hitInfo, Mathf.Infinity, LayerMask.value))
-            }//if(Input.GetMouseButtonDown(0) == true) //왼쪽 마우스 버튼 클릭시
+            }//if (Physics.Raycast(m_MouseRay, out hitInfo, Mathf.Infinity, LayerMask.value))
+        }//if(Input.GetMouseButtonDown(0) == true) //왼쪽 마우스 버튼 클릭시
     }//void MousePickCheck()  //마우스 클릭 감지를 위한 함수
 
     void MousePicking(Vector3 pickVec, GameObject pickMon = null)
@@ -362,6 +371,12 @@ public class Hero_Ctrl : MonoBehaviour
         return m_CurState == AnimState.attack || m_CurState == AnimState.skill;
     }
 
+    //현재 스킬 애니메이션 중인지 확인하는 메서드
+    public bool IsSkill()
+    {
+        return m_CurState == AnimState.skill;
+    }
+
     public void AttackOrder()
     {
         if (IsAttack() == false)  //공격중이거나 스킬 사용중이 아닐 때만... 
@@ -378,6 +393,21 @@ public class Hero_Ctrl : MonoBehaviour
 
         }//if(IsAttack() == false)  //공격중이거나 스킬 사용중이 아닐 때만... 
     }//public void AttackOrder()
+
+    public void SkillOrder(string Type, ref float CoolDur, ref float CurCool)
+    {
+        if (0.0f < CurCool)
+            return;
+
+        if(IsSkill() == false) //스킬 사용중이 아닐 때만...
+        {
+            ChangeAnimState(AnimState.skill);
+            ClearMsPickMove();
+
+            CoolDur = 7.0f;
+            CurCool = CoolDur;
+        }
+    } //public void SkillOrder(string Type, ref float CoolDur, ref float CurCool)
 
     #region --- 이벤트 함수
 
@@ -502,6 +532,12 @@ public class Hero_Ctrl : MonoBehaviour
             //공격 거리 밖에 있는 경우
             if (m_AttackDist + 0.1f < fCacLen)
                 continue;
+
+            effObj = EffectPool.Inst.GetEffectObj("FX_Hit_01", Vector3.zero, Quaternion.identity);
+            effPos = m_EnemyList[i].transform.position;
+            effPos.y += 1.1f;
+            effObj.transform.position = effPos + (-m_CacTgVec.normalized * 1.13f);
+            effObj.transform.LookAt(effPos + (m_CacTgVec.normalized * 2.0f));
 
             m_EnemyList[i].GetComponent<Monster_Ctrl>().TakeDamage(this.gameObject);
         }

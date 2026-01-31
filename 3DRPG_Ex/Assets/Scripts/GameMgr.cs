@@ -17,6 +17,14 @@ public class GameMgr : MonoBehaviour
     public Button m_Attack_Btn = null;
     public Button m_Skill_Btn  = null;
 
+    //--- 스킬 쿨 타임 적용
+    Text m_Skill_Cool_Label = null;
+    Image  m_Skill_Cool_Mask = null;
+    Button m_Sk_UI_Btn = null;
+    [HideInInspector] public float m_Skill_CurCool = 0.0f;
+    float m_Skill_CoolDur = 7.0f;
+    //--- 스킬 쿨 타임 적용
+
     [Header("--- Damage Text ---")]
     public Transform m_DText_Canvas_W = null;
     public GameObject m_DTextPrefab_W = null;
@@ -45,6 +53,23 @@ public class GameMgr : MonoBehaviour
                     m_RefHero.AttackOrder();
             });
 
+        //--- Skill Button 처리 코드
+        m_Skill_CurCool = 0.0f;
+
+        if(m_Skill_Btn != null)
+        {
+            m_Skill_Btn.onClick.AddListener(() =>
+            {
+                if (m_RefHero != null)
+                    m_RefHero.SkillOrder("RainArrow",
+                            ref m_Skill_CoolDur, ref m_Skill_CurCool);
+            });
+
+            m_Skill_Cool_Label = m_Skill_Btn.transform.GetComponentInChildren<Text>();
+            m_Skill_Cool_Mask = m_Skill_Btn.transform.Find("SkillCoolMask").GetComponent<Image>();
+
+            m_Sk_UI_Btn = m_Skill_Btn.GetComponent<Button>();
+        }
         //--- Skill Button 처리 코드
 
     }//void Start()

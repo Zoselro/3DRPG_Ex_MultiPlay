@@ -26,6 +26,7 @@ public class Monster_Ctrl : MonoBehaviour
     //애니메이션 클래스 변수(인스펙터뷰에 표시용)
     public Anim anim;       //AnimSupporter.cs 쪽에 정의되어 있음
     Animation m_RefAnimation = null;        //Skeleton
+    Animator m_RefAnimator = null;          //Alien
 
     //--- Monster AI
     [HideInInspector] public GameObject m_AggroTarget = null;   //공격할 대상
@@ -48,6 +49,7 @@ public class Monster_Ctrl : MonoBehaviour
     void Start()
     {
         m_RefAnimation = GetComponentInChildren<Animation>();
+        m_RefAnimator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -191,6 +193,21 @@ public class Monster_Ctrl : MonoBehaviour
             else
                 m_RefAnimation.Play(strAnim);
         }//if (m_RefAnimation != null)
+
+        if(m_RefAnimator != null)
+        {
+            m_RefAnimator.ResetTrigger(m_PreState.ToString());
+            //기존에 적용되어 있던 Trigger 변수 제거
+
+            if (0.0f < CrossTime)
+                m_RefAnimator.SetTrigger(newState.ToString());
+            else
+            {
+                string animName = anim.Idle.name;
+                m_RefAnimator.Play(animName, -1, 0);
+                //가운데 -1은 Layer Index, 뒤에 0은 처음부터 다시 시작 플레이 시키겠다는 의미
+            }
+        }//if(m_RefAnimator != null)
 
         m_PreState = newState;
         m_CurState = newState;
