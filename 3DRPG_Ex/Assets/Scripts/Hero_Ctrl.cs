@@ -562,6 +562,66 @@ public class Hero_Ctrl : MonoBehaviour
         }
     }//void Event_AttFinish()
 
+    void Event_SkillHit()
+    {
+        m_EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
+        int iCount = m_EnemyList.Length;
+        float fCacLen = 0.0f;
+        GameObject effObj = null;
+        Vector3 effPos = Vector3.zero;
+
+        effObj = EffectPool.Inst.GetEffectObj("FX_AttackCritical_01",
+                                        Vector3.zero, Quaternion.identity);
+        effPos = transform.position;
+        effPos.y += 1.0f;
+        effObj.transform.position = effPos + (transform.forward * 2.3f);
+        effObj.transform.LookAt(effPos + (-transform.forward * 2.0f));
+
+        for(int i = 0; i < iCount; i++)
+        {
+            if (m_EnemyList[i] == null)
+                continue;
+
+            m_CacTgVec = m_EnemyList[i].transform.position - transform.position;
+            fCacLen = m_CacTgVec.magnitude;
+            m_CacTgVec.y = 0.0f;
+
+            //공격 각도 제한 없음 360도 모두 데미지 주기
+
+            //공격 볌위 밖에 있는 경우
+            if (m_AttackDist + 0.1f < fCacLen)
+                continue;
+
+            effObj = EffectPool.Inst.GetEffectObj("FX_Hit_01", Vector3.zero, Quaternion.identity);
+            effPos = m_EnemyList[i].transform.position;
+            effPos.y += 1.1f;
+            effObj.transform.position = effPos + (-m_CacTgVec.normalized * 1.13f);
+            effObj.transform.LookAt(effPos + (m_CacTgVec.normalized * 2.0f));
+
+            m_EnemyList[i].GetComponent<Monster_Ctrl>().TakeDamage(this.gameObject, 50);
+        }//for (int i = 0; i < iCount; i++)
+    }//void Event_SkillHit()
+
+    void Event_SkillFinish()
+    {
+        //Skill 상태인데 Attack 애니메이션 끝이 들어온 경우라면 제외시켜 버린다.
+        //공격 애니 중에 스킬 발동시 공격 끝나는 이벤트 함수가 들어와서 스킬이
+        //취소되는 현상이 있을 수 있어서 예외 처리함
+        //Skill 상태일 때는 Skill상태로 끝나야 한다.
+        if (m_CurState != AnimState.skill)
+            return;
+
+        if(IsTargetEnemyActive(0.2f) == true)
+        {
+            ChangeAnimState(AnimState.attack);
+            ClearMsPickMove();
+        }
+        else
+        {
+            ChangeAnimState(AnimState.idle);
+        }
+    }//void Event_SkillFinish()
+
     #endregion
 
     public void TakeDamage(float Damage = 10.0f)

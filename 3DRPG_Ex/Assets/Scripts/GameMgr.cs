@@ -78,6 +78,8 @@ public class GameMgr : MonoBehaviour
     void Update()
     {
         MsOffObserver();
+
+        SkillCool_Update();
     }
 
     public void MsClickMarkOn(Vector3 pickPos)
@@ -142,6 +144,28 @@ public class GameMgr : MonoBehaviour
         }//if(damageTx != null)
 
     }//public void SpawnDText_W(int dmg, Vector3 a_SpPos, int a_ColorIdx = 0)
+
+    void SkillCool_Update()
+    {
+        if(0.0f < m_Skill_CurCool)
+        {
+            m_Skill_CurCool -= Time.deltaTime;
+            m_Skill_Cool_Label.text = ((int)m_Skill_CurCool).ToString();
+            m_Skill_Cool_Mask.fillAmount = m_Skill_CurCool / m_Skill_CoolDur;
+
+            if (m_Sk_UI_Btn != null)
+                m_Skill_Btn.enabled = false;    //버튼 눌려지지 않게 하기...
+        }
+        else
+        {
+            m_Skill_CurCool = 0.0f;
+            m_Skill_Cool_Label.text = "";
+            m_Skill_Cool_Mask.fillAmount = 0.0f;
+
+            if (m_Sk_UI_Btn != null)
+                m_Skill_Btn.enabled = true;   //버튼 눌려지지 않게 하기...
+        }
+    }//void Skill_Cool_Updade()
 
     public bool IsPointerOverUIObject()
     {   //마우스가 UI를 위에 있는지? 아닌지? 를 확인 하는 함수
