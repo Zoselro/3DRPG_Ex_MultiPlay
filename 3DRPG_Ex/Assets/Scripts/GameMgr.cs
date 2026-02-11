@@ -44,7 +44,7 @@ public class GameMgr : MonoBehaviour
         Inst = this;
 
         // Photon View 컴포넌트 할당
-        pv.GetComponent<PhotonView>();
+        pv = GetComponent<PhotonView>();
 
         // 주인공 생성하는 함수 호출
         CreateHero();
