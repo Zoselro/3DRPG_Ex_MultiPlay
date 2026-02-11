@@ -1,8 +1,11 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Hero_Ctrl : MonoBehaviour
 {
+    [HideInInspector] public PhotonView pv = null;
+
     //--- Hp ¹Ù Ç¥½Ã
     [HideInInspector] public float CurHp = 1000;
     [HideInInspector] public float MaxHp = 1000;
@@ -79,6 +82,8 @@ public class Hero_Ctrl : MonoBehaviour
 
     void Awake()
     {
+
+        
         Camera_Ctrl a_CamCtrl = Camera.main.GetComponent<Camera_Ctrl>();
         if (a_CamCtrl != null)
             a_CamCtrl.InitCamera(this.gameObject);

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 public class GameMgr : MonoBehaviour
 {
+    PhotonView pv;
+
     [HideInInspector] public Hero_Ctrl m_RefHero = null;
 
     //--- MouseClickMark 처리변수
@@ -38,7 +41,13 @@ public class GameMgr : MonoBehaviour
 
     void Awake()
     {
-        Inst = this;    
+        Inst = this;
+
+        // Photon View 컴포넌트 할당
+        pv.GetComponent<PhotonView>();
+
+        // 주인공 생성하는 함수 호출
+        CreateHero();
     }
     //--- 싱글턴 패턴을 위한 인스턴스 변수 선언
 
@@ -192,4 +201,22 @@ public class GameMgr : MonoBehaviour
 #endif
     }//public bool IsPointerOverUIObject() 
 
+
+    private void CreateHero()
+    {
+        Vector3 hPos = Vector3.zero;
+        Vector3 addPos = Vector3.zero;
+
+        GameObject hPosObj = GameObject.Find("HeroSpawnPos");
+        if(hPosObj != null)
+        {
+            // 10m 이내 랜덤 스폰
+            addPos.x = Random.Range(-5.0f, 5.0f);
+            addPos.z = Random.Range(-5.0f, 5.0f);
+            hPos = hPosObj.transform.position + addPos;
+
+            //Resources에 빼놨던 "HeroPrefab" 프리팹
+            PhotonNetwork.Instantiate("HeroPrefab", hPos, Quaternion.identity, 0);
+        }
+    }
 }

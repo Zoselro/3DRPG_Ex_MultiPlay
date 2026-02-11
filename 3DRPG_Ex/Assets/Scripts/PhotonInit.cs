@@ -1,6 +1,8 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 public class PhotonInit : MonoBehaviourPunCallbacks // 포톤에서 제공해주는 MonoBehaviour를 상속받은 클래스
@@ -60,7 +62,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks // 포톤에서 제공해주는 MonoB
     }
 
     //PhotonNetwork.JoinRandomRoom(); 함수가 실패 했을 경우, 호출 되는 오버라이드 함수
-    public override void OnCreateRoomFailed(short returnCode, string message)
+    public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log("랜덤 방 참가 실패 (참가 할 방이 존재 하지 않습니다.)");
 
@@ -83,8 +85,19 @@ public class PhotonInit : MonoBehaviourPunCallbacks // 포톤에서 제공해주는 MonoB
     {   // 서버 역할인 경우 : 방입장
         // 클라이언트 역할인 경우 : JoinRoom, JoinRandomRoom --> 방 입장
         Debug.Log("방 참가 완료");
-        
+
+        StartCoroutine(this.LoadBattleField());
         // 룸씬으로 이동하는 코루틴 실행
+    }
+
+    private IEnumerator LoadBattleField()
+    {
+        // 씬을 이동하는 동안 포톤 클라이드 서버로부터 네크워크 메시지 수신 중단
+        PhotonNetwork.IsMessageQueueRunning = false;
+        // 백그라운드로 씬 로딩
+        AsyncOperation ao = SceneManager.LoadSceneAsync("SampleScene"); // 로딩연출 할 때 쓰는 씬 (게이지바가 올라가는 거라던지..)
+
+        yield return ao;
     }
 
     #endregion
