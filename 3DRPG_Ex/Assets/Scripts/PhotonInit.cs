@@ -96,7 +96,6 @@ public class PhotonInit : MonoBehaviourPunCallbacks // 포톤에서 제공해주는 MonoB
         PhotonNetwork.IsMessageQueueRunning = false;
         // 백그라운드로 씬 로딩
         AsyncOperation ao = SceneManager.LoadSceneAsync("SampleScene"); // 로딩연출 할 때 쓰는 씬 (게이지바가 올라가는 거라던지..)
-
         yield return ao;
     }
 

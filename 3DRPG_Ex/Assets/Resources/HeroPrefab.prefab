@@ -790,6 +790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39322b93093abc343b7bfda7f0906eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pv: {fileID: 0}
   CurHp: 1000
   MaxHp: 1000
   ImgHpbar: {fileID: 2693638082984305201}
@@ -814,8 +815,9 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
+  observableSearch: 0
+  ObservedComponents:
+  - {fileID: 5008234956023244329}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

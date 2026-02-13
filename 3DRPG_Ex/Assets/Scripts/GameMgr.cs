@@ -54,6 +54,9 @@ public class GameMgr : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Time.timeScale = 1.0f; // 일시정지 풀어주기
+        PhotonNetwork.IsMessageQueueRunning = true; // 통신을 주고받는 처리를 다시 동기화
+
         //--- Attack Button 처리 코드
         if (m_Attack_Btn != null)
             m_Attack_Btn.onClick.AddListener(() =>

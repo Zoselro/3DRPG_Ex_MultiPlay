@@ -2,7 +2,9 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Hero_Ctrl : MonoBehaviour
+// 동기화의 원칙 : IsMine인 한군대에서 계산한다.
+// IPunObservable : 관찰할 데이터들을 주고받으며 동기화 해주도록 구현할 수 있는 인터페이스
+public class Hero_Ctrl : MonoBehaviourPunCallbacks, IPunObservable
 {
     [HideInInspector] public PhotonView pv = null;
 
@@ -48,6 +50,11 @@ public class Hero_Ctrl : MonoBehaviour
     Quaternion m_TargetRot = Quaternion.identity; //회전 계산용 변수
     //--- 이동 관련 공통 변수
 
+    //--- 위치 정보를 송수신할 때 사용할 변수 선언 및 초기값 설정
+    Vector3 CurPos = Vector3.zero;
+    Quaternion CurRot = Quaternion.identity;
+    //--- 위치 정보를 송수신할 때 사용할 변수 선언 및 초기값 설정
+
     //--- Animator 관련 변수
     Animator m_Animator = null;
     AnimState m_PreState = AnimState.idle;
@@ -80,46 +87,96 @@ public class Hero_Ctrl : MonoBehaviour
     Color m_CacColor;
     //--- 데미지 칼라 연출 관련 변수
 
+    // 처음 데이터를 받았는지 체크하는 변수
+    // 주인공이 나갔다 들어 왔을 때
+    // 다른 주인공의 위치가 쭉 밀리면서 보정되는 현상 개선하기 위해 필요한 변수
+    bool isFirstUpdate = true;
+
     void Awake()
     {
+        // PhotonView 컴포넌트 찾아놓기
+        pv = GetComponent<PhotonView>();
 
+        // 내가 조종하는 캐릭터 일 때만 카메라를 따라오게 하는 코드
+        if (pv.IsMine)
+        {
+            Camera_Ctrl a_CamCtrl = Camera.main.GetComponent<Camera_Ctrl>();
+            if (a_CamCtrl != null)
+                a_CamCtrl.InitCamera(this.gameObject);
+        }
         
-        Camera_Ctrl a_CamCtrl = Camera.main.GetComponent<Camera_Ctrl>();
-        if (a_CamCtrl != null)
-            a_CamCtrl.InitCamera(this.gameObject);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameMgr.Inst.m_RefHero = this;
+        if(pv.IsMine)
+            GameMgr.Inst.m_RefHero = this;
+
+        NickNameText.text = pv.Owner.NickName;
 
         m_Animator = this.GetComponent<Animator>();
 
         //LayerMask = 1 << LayerMask.NameToLayer("MyTerrain");
         //LayerMask |= 1 << LayerMask.NameToLayer("Enemy");  //Enemy 레이어도 피킹이 되도록 설정
 
+        //원격 Hero(아바타) -> PhotonNetwork.Instantiate 를 한 PC (IsMine이 아닌 PC)
+        //원격 Hero(아바타)의 위치 및 회전 값을 처리할 변수의 초기값 설정
+        CurPos = transform.position;
+        CurRot = transform.rotation;
+        //원격 Hero(아바타)의 위치 및 회전 값을 처리할 변수의 초기값 설정
+
         FindDefShader();
 
     }//void Start()
 
-    // Update is called once per frame
     void Update()
     {
-        MousePickCheck(); //<-- 마우스 클릭 바닥지형을 클릭했는지 확인하는 함수
+        // 방에 들어가지 않은 상태에서는 실행 금지
+        if (!PhotonNetwork.InRoom)
+            return;
 
-        FindEnemyTarget();
+        // 나가는 타이밍에 포톤 정보들이 한프레임 먼저 사라지고
+        // LoadScene("LobbyScene"); 이 한프레임 늦게 호출되는 문제 해결법
+        if (PhotonNetwork.CurrentRoom == null || PhotonNetwork.LocalPlayer == null)
+            return; // 동기화 가능한 상태 일때만 업데이트를 계산해 준다.
 
-        KeyBDMove();
-        JoyStickMvUpdate();
-        MousePickUpdate();
+        // 내가 조종하는 캐릭터만 이 함수들이 동작 되게끔.
+        if (pv.IsMine)
+        {
+            MousePickCheck(); //<-- 마우스 클릭 바닥지형을 클릭했는지 확인하는 함수
 
-        AttackRotUpdate();
+            FindEnemyTarget();
 
-        UpdateAnimState(); //<-- idle 애니메이션으로 돌아가야 하는지 감시하는 함수
+            KeyBDMove();
+            JoyStickMvUpdate();
+            MousePickUpdate();
 
+            AttackRotUpdate();
+
+            UpdateAnimState(); //<-- idle 애니메이션으로 돌아가야 하는지 감시하는 함수
+
+        }
+        else // 원격지 아바타 캐릭터 들은 위치,회전,애니메이션을 따라오게 동기화 처리
+        {
+            if(10.0f < (transform.position - CurPos).magnitude) // 벡터의 길이 값 아바타의 위치 값 - 현재 위치 값
+            {
+                transform.position = CurPos;
+            }
+            else
+            {
+                // 원격 플레이어의 플레이어를 수신 받은 위치까지 부드럽게 이동시킴
+                transform.position = Vector3.Lerp(transform.position, CurPos,
+                    Time.deltaTime * 10.0f);
+            }
+
+            // 원격 플레이어의 
+            transform.rotation = Quaternion.Slerp(transform.rotation, CurRot,
+                Time.deltaTime * 10.0f);
+
+            //---- 애니메이션 동기화
+            ChangeAnimState(m_CurState); // 원격지 아바타들은 여기서 애니메이션 동기화
+        }
         AttachColorUpdate();
-
     }//void Update()
 
     void KeyBDMove()
@@ -384,6 +441,9 @@ public class Hero_Ctrl : MonoBehaviour
 
     public void AttackOrder()
     {
+        if (!pv.IsMine) // IsMine 아니면 공격 조작 금지
+            return;
+
         if (IsAttack() == false)  //공격중이거나 스킬 사용중이 아닐 때만... 
         {
             //키보드 컨트롤이나 조이스킬 컨트롤로 이동 중이고
@@ -401,6 +461,9 @@ public class Hero_Ctrl : MonoBehaviour
 
     public void SkillOrder(string Type, ref float CoolDur, ref float CurCool)
     {
+        if (!pv.IsMine) // IsMine 아니면 공격 조작 금지
+            return;
+
         if (0.0f < CurCool)
             return;
 
@@ -552,6 +615,9 @@ public class Hero_Ctrl : MonoBehaviour
 
     void Event_AttFinish()
     {
+        if (!pv.IsMine) // IsMine 아니면 공격 조작 금지
+            return;
+
         //Attack 상태일 때는 Attack상태로 끝나야 한다.
         if (m_CurState != AnimState.attack)
             return;
@@ -609,6 +675,9 @@ public class Hero_Ctrl : MonoBehaviour
 
     void Event_SkillFinish()
     {
+        if (!pv.IsMine) // IsMine 아니면 공격 조작 금지
+            return;
+
         //Skill 상태인데 Attack 애니메이션 끝이 들어온 경우라면 제외시켜 버린다.
         //공격 애니 중에 스킬 발동시 공격 끝나는 이벤트 함수가 들어와서 스킬이
         //취소되는 현상이 있을 수 있어서 예외 처리함
@@ -633,12 +702,14 @@ public class Hero_Ctrl : MonoBehaviour
     {
         if (CurHp <= 0.0f)
             return;
+        if (pv.IsMine)
+        {
+            CurHp -= Damage;
+            if(CurHp < 0.0f)
+               CurHp = 0.0f;
+            ImgHpbar.fillAmount = CurHp / MaxHp;
+        }
 
-        CurHp -= Damage;
-        if(CurHp < 0.0f)
-           CurHp = 0.0f;
-
-        ImgHpbar.fillAmount = CurHp / MaxHp;
 
         SetAttachColor();
 
@@ -646,16 +717,22 @@ public class Hero_Ctrl : MonoBehaviour
         cacPos.y += 2.65f;
         GameMgr.Inst.SpawnDText_W((int)Damage, cacPos, 1);
 
-        if (CurHp <= 0.0f)
+        if (pv.IsMine)
         {
-            Die();   //사망처리
+            if (CurHp <= 0.0f)
+            {
+                Die();   //사망처리
+            }
         }
 
     }//public void TakeDamage(float Damage = 10.0f)
 
     void Die()
     {
-        //나중 처리
+        if (pv.IsMine)
+        {
+            Debug.Log("주인공 사망");
+        }
     }
 
     void FindDefShader()
@@ -746,4 +823,38 @@ public class Hero_Ctrl : MonoBehaviour
 
     }//void AttachColorUpdate()
 
+    // 0.3프레임당 호출되는 메서드
+    // OnPhotonSerializeView : 관찰할 데이터들을 주고받으며 동기화 해주도록 구현할 수 있는 인터페이스
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        // 방에 들어가지 않은 상태에서는 실행 금지
+        if (!PhotonNetwork.InRoom)
+            return;
+
+        // 로컬 플레이어의 위치 정보 송신(pv.IsMine) -> IsMine 입장에서 보내는 것
+        if(stream.IsWriting) // stream 쪽에 기록을 하기 위함
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            stream.SendNext((int)m_CurState);
+            stream.SendNext(CurHp);
+        }
+        else // 원격 플레이어 위치 정보 수신 (아바타들) // 아바타들 입장에서 IsMine에서 보낸 것을 받는 것.
+        {
+            CurPos = (Vector3)stream.ReceiveNext();
+            CurRot = (Quaternion)stream.ReceiveNext();
+            m_CurState = (AnimState)stream.ReceiveNext();
+            NetHp = (float)stream.ReceiveNext();
+
+            if (isFirstUpdate)
+            {
+                // 보간(Lerp) 없이 바로 현재 위치로 강제 이동
+                transform.position = CurPos;
+                transform.rotation = CurRot;
+
+                // 다음부터는 부드럽게 움직이도록 플래그 끔
+                isFirstUpdate = false;
+            }
+        }// 원격 플레이어 위치 정보 수신 (아바타들) // 아바타들 입장에서 IsMine에서 보낸 것을 받는 것.
+    }
 }//public class Hero_Ctrl : MonoBehaviour
