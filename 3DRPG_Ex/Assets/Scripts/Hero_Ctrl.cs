@@ -175,6 +175,8 @@ public class Hero_Ctrl : MonoBehaviourPunCallbacks, IPunObservable
 
             //---- 애니메이션 동기화
             ChangeAnimState(m_CurState); // 원격지 아바타들은 여기서 애니메이션 동기화
+
+            Remote_TakeDamage(); // 원격지 아바타들은 여기서 hp 동기화를 따라간다.
         }
         AttachColorUpdate();
     }//void Update()
@@ -727,11 +729,29 @@ public class Hero_Ctrl : MonoBehaviourPunCallbacks, IPunObservable
 
     }//public void TakeDamage(float Damage = 10.0f)
 
+    private void Remote_TakeDamage() // 원격지 컴퓨터에서 Hp 동기화 함수
+    {
+        if(0.0f < CurHp)
+        {
+            CurHp = NetHp; // 원격 플레이어의 체력 값을 수신 받은 NetHp로 업데이트
+
+            // Image UI항목의 fillAmount을 속성을 조절해 생명 게이지값 조정
+            ImgHpbar.fillAmount = CurHp / (float)MaxHp;
+
+            if(CurHp <= 0.0f) // 사망 처리는 한 번 만 호출되기 하기 위함.
+            {
+                CurHp = 0.0f;
+                //Die();   //사망처리
+            }
+        }
+    }
+
     void Die()
     {
         if (pv.IsMine)
         {
             Debug.Log("주인공 사망");
+            GameMgr.Inst.OnClickBackBtn(); // 사망 시 로비로 돌아가기
         }
     }
 

@@ -1,3 +1,5 @@
+using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +10,11 @@ public enum MonType
     Count
 }
 
-public class Monster_Ctrl : MonoBehaviour
+
+public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInstantiateMagicCallback
 {
+    PhotonView pv = null; // Photon View 컴포넌트 할당 변수
+
     public MonType monType;
 
     //--- Hp 바 표시
@@ -45,14 +50,49 @@ public class Monster_Ctrl : MonoBehaviour
     float m_CacRate = 0.0f;
     float m_NormalTime = 0.0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //--- 몬스터 사망 연출
+    Transform m_Canvas = null;
+    Vector3 m_DieDir = Vector3.zero;
+    float m_DieDur = 0.0f;
+    float m_Dietimer = 0.0f;
+
+    SkinnedMeshRenderer m_SMR = null;
+    SkinnedMeshRenderer[] m_SMRList = null;
+    MeshRenderer[] m_MeshList = null; // 장착 무기용
+    float m_Ratio = 0.0f;
+    Color m_CalcColor;
+    //--- 몬스터 사망 연출
+
+    //--- 네트웍 동기화 처리 변수
+    Vector3 currPos = Vector3.zero;
+    Quaternion currRot = Quaternion.identity;
+    //--- 네트웍 동기화 처리 변수
+
+    // 처음 데이터를 받았는지 여부를 확인하는 변수
+    // 주인공이 나갔다 왔을 때 
+    // 다른 캐릭터들의 위치가 쭉 밀리면서 보정되는 현상을 개선하기 위해 필요한 변수
+
+    bool isFirstUpdate = true;
+
+    private void Awake()
+    {
+        pv = GetComponent<PhotonView>(); // Photon View 컴포넌트 할당
+
+        // 원격 캐릭터의 위치 및 회전 값을 처리할 변수의 초기값을 설정
+        currPos = transform.position;
+        currRot = transform.rotation;
+
+        m_DieDir = -transform.forward;
+    }
+
     void Start()
     {
         m_RefAnimation = GetComponentInChildren<Animation>();
         m_RefAnimator = GetComponentInChildren<Animator>();
+
+        FindDefShader();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (m_CurState == AnimState.die) //죽겄으면...
@@ -251,6 +291,10 @@ public class Monster_Ctrl : MonoBehaviour
 
         ImgHpbar.fillAmount = CurHp / MaxHp;
 
+        m_DieDir = transform.position - Attacker.transform.position; // 공격자에서 몬스터를 향하는 벡터 계산
+        m_DieDir.y = 0.0f; // 수평 방향으로만 이동하도록 y축 성분 제거
+        m_DieDir.Normalize();
+
         Vector3 cacPos = this.transform.position;
         cacPos.y += 2.65f;
         GameMgr.Inst.SpawnDText_W((int)Damage, cacPos);
@@ -280,5 +324,75 @@ public class Monster_Ctrl : MonoBehaviour
         m_AggroTarget.GetComponent<Hero_Ctrl>().TakeDamage(10);
 
     }//public void Event_AttHit() //공격 애니에니션에서 데미지가 들어가는 시점에 호출되는 함수
+
+    void FindDefShader()
+    {
+        if(m_SMR == null)
+        {
+            m_SMRList = GetComponentsInChildren<SkinnedMeshRenderer>();
+            m_MeshList = GetComponentsInChildren<MeshRenderer>();
+
+            m_SMR = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        }
+    }
+
+    IEnumerator DieDirDirection() // 몬스터 사망 연출을 위한 코루틴 함수
+    {
+        m_DieDur = 2.0f; // 사망 연출이 지속되는 시간
+        m_Dietimer = 2.0f; // 사망 연출이 지속되는 시간
+
+        BoxCollider boxColl = gameObject.GetComponentInChildren<BoxCollider>();
+        if(boxColl != null)
+            boxColl.enabled = false; // 사망 연출이 시작되면 충돌체 비활성화
+
+        while (true)
+        {
+            m_Ratio = m_Dietimer / m_DieDur; // 사망 연출이 얼마나 진행되었는지 계산하는 변수
+            m_Ratio = Mathf.Min(m_Ratio, 1.0f); // 0과 1 사이로 값을 제한
+            m_CalcColor = new Color(1.0f, 1.0f, 1.0f, m_Ratio); // 사망 연출이 진행됨에 따라 투명해지는 색상 계산
+
+            //--- 뒤로 밀리게
+            if (0.9f < m_Ratio && 0.0f < m_DieDir.magnitude)
+            {
+                transform.position = transform.position + m_DieDir * (((m_Ratio * 0.38f) * 14.0f) * Time.deltaTime);
+            }
+            //--- 뒤로 밀리게
+
+            if (m_Ratio < 0.83f)
+            {
+                if (m_Canvas == null)
+                    m_Canvas = transform.Find("Canvas");
+
+                if (m_Canvas != null)
+                    m_Canvas.gameObject.SetActive(false); // 사망 연출이 진행됨에 따라 캔버스 비활성화
+            }
+
+            m_Dietimer -= Time.deltaTime; // 사망 연출이 진행되는 시간 감소
+            if (m_Dietimer <= 0.0f)
+            {
+                //-- 네트워크 동기화 처리
+                //몬스터 다시 스폰되도록 예약
+                //-- 네트워크 동기화 처리
+                Destroy(gameObject); // 사망 연출이 끝나면 몬스터 오브젝트 제거
+
+                yield break; // 코루틴 종료
+            }
+
+            yield return null; // 다음 프레임까지 대기
+        }
+    }
+
+    //PhotonNetwork.Instantiate()로 생성된 네트워크 오브젝트가 생성될 때 자동으로 호출되는 함수
+    //방 기준으로 Awake() 함수 직후 자동으로 호출되는 함수
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        Debug.Log("몬스터 네트워크 오브젝트 생성됨");
+    }
+
+    
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        Debug.Log("몬스터 네트워크 오브젝트 동기화 처리");
+    }
 
 }//public class Monster_Ctrl 

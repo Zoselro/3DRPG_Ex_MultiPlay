@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 3755275647097196828}
   - component: {fileID: 3371000915223372174}
   - component: {fileID: 468276469247273109}
+  - component: {fileID: 8105944020020177634}
   m_Layer: 7
   m_Name: Skeleton_Root
   m_TagString: Enemy
@@ -230,6 +231,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &8105944020020177634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7010320498372743072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 0
+  ObservedComponents:
+  - {fileID: 3371000915223372174}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &8549727834548494171
 GameObject:
   m_ObjectHideFlags: 0

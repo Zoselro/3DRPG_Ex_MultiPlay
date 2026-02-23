@@ -1,10 +1,12 @@
 using Photon.Pun;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameMgr : MonoBehaviour
+public class GameMgr : MonoBehaviourPunCallbacks
 {
     PhotonView pv;
 
@@ -52,7 +54,7 @@ public class GameMgr : MonoBehaviour
     //--- 싱글턴 패턴을 위한 인스턴스 변수 선언
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    async Task Start()
     {
         Time.timeScale = 1.0f; // 일시정지 풀어주기
         PhotonNetwork.IsMessageQueueRunning = true; // 통신을 주고받는 처리를 다시 동기화
@@ -83,6 +85,9 @@ public class GameMgr : MonoBehaviour
             m_Sk_UI_Btn = m_Skill_Btn.GetComponent<Button>();
         }
         //--- Skill Button 처리 코드
+
+        if (m_BackBtn != null)
+            m_BackBtn.onClick.AddListener(OnClickBackBtn);
 
     }//void Start()
 
@@ -221,5 +226,41 @@ public class GameMgr : MonoBehaviour
             //Resources에 빼놨던 "HeroPrefab" 프리팹
             PhotonNetwork.Instantiate("HeroPrefab", hPos, Quaternion.identity, 0);
         }
+    }
+
+    // --- Back Button 처리 함수 (룸 나가기 버턴)
+    public void OnClickBackBtn()
+    {
+        // 마지막 사람이 방을 떠날 때 룸의 CustomProerties를 초기화 해줘야 한다.
+        if(PhotonNetwork.PlayerList != null && PhotonNetwork.PlayerList.Length <= 1)
+        {
+            if(PhotonNetwork.CurrentRoom != null)
+            {
+                PhotonNetwork.CurrentRoom.CustomProperties.Clear();
+            }
+        }
+
+        // 지금 나가려는 유저를 찾아서 그 유저의
+        // 모든 CustomProperties를 초기화 해 주고 나가는 것이 좋다.
+        // 그렇지 않으면 나갔다 즉시 방 입장시 오류가 발생한다.
+        if(PhotonNetwork.LocalPlayer != null)
+        {
+            PhotonNetwork.LocalPlayer.CustomProperties.Clear();
+        }
+        // 그래야 중계되던 것이 모두 초기화 될 것이다.
+
+        Debug.Log("방 나가기 버튼 클릭!");
+
+        // 현재 룸을 빠져나가며 생성한 모든 네트워크 객체를 삭제
+        PhotonNetwork.LeaveRoom(); // 포톤 방을 빠져나간다.
+    }
+
+    // 룸에서 접속 종료 되었을 때 호출되는 콜백 함수
+    // LeaveRoom을 호출 되었을 때 호출되는 콜백 함수
+    public override void OnLeftRoom()
+    {
+        Debug.Log("방 나가기 완료! OnLoeftRoom 콜백함수 호출!");
+        Time.timeScale = 1.0f; // 일시정지 풀어주기
+        SceneManager.LoadScene("PhotonLobby"); // 로비씬으로 이동
     }
 }
