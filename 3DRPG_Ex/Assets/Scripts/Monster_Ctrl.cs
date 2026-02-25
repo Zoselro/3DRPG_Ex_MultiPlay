@@ -301,7 +301,10 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
 
         if(CurHp <= 0.0f) //사망처리
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            MyChnageAnim(AnimState.die, 0.1f); // 사망 애니메이션 재생
+            FindDefShader();
+            StartCoroutine("DieDirDirection"); // 사망 연출을 위한 코루틴 시작
         }
     }//public void TakeDamage(GameObject Attacker, float Damage = 10.0f)
 
@@ -366,6 +369,30 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
                 if (m_Canvas != null)
                     m_Canvas.gameObject.SetActive(false); // 사망 연출이 진행됨에 따라 캔버스 비활성화
             }
+
+            //--- 투명화 연출
+            for(int i = 0; i < m_SMRList.Length; i++)
+            {
+                if(GameMgr.Inst.g_VertexLitShader != null && m_SMRList[i].material.shader != GameMgr.Inst.g_VertexLitShader)
+                {
+                    m_SMRList[i].material.shader = GameMgr.Inst.g_VertexLitShader; // 사망 연출이 진행됨에 따라 몬스터의 쉐이더를 변경하여 투명화 효과 적용
+                }
+                m_SMRList[i].material.SetColor("_Color", m_CalcColor);
+            }
+
+            // --- 무기 투명화 연출
+            if(m_MeshList != null)
+            {
+                for(int i = 0; i< m_MeshList.Length; i++)
+                {
+                    if (GameMgr.Inst.g_VertexLitShader != null && m_MeshList[i].material.shader != GameMgr.Inst.g_VertexLitShader)
+                    {
+                        m_MeshList[i].material.shader = GameMgr.Inst.g_VertexLitShader; // 사망 연출이 진행됨에 따라 몬스터의 쉐이더를 변경하여 투명화 효과 적용
+                    }
+                    m_MeshList[i].material.SetColor("_Color", m_CalcColor);
+                }
+            }
+
 
             m_Dietimer -= Time.deltaTime; // 사망 연출이 진행되는 시간 감소
             if (m_Dietimer <= 0.0f)
