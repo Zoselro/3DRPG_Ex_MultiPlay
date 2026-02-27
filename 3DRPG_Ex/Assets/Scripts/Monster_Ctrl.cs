@@ -24,6 +24,8 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
     public Image ImgHpbar;
     //--- Hp 바 표시
 
+    [HideInInspector] public int m_SpawnIdx = -1; // List<SpawnPos> m_SpawnPos; 인덱스
+
     AnimState m_PreState = AnimState.idle; //애니메이션 변경을 위한 함수 
     [HideInInspector] public AnimState m_CurState = AnimState.idle; //애니메이션 변경을 위한 변수
     AnimState AI_State = AnimState.idle; //몬스터 AI 상태를 계산하기 위한 Enum 변수
@@ -398,10 +400,18 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
             if (m_Dietimer <= 0.0f)
             {
                 //-- 네트워크 동기화 처리
-                //몬스터 다시 스폰되도록 예약
+                //몬스터 IsMine이든 아바타든 누가 죽었든
+                //MonSpawn_Mgr 의 소유자 IsMasterClient(pv.IsMine == true) 입장에서 처리한다는 의미
+                MonSpawn_Mgr.Inst.ScheduleAllSpawns(m_SpawnIdx, Random.Range(10.0f, 15.0f));
                 //-- 네트워크 동기화 처리
-                Destroy(gameObject); // 사망 연출이 끝나면 몬스터 오브젝트 제거
+                //Destroy(gameObject); // 사망 연출이 끝나면 몬스터 오브젝트 제거
 
+                // 사망 처리도 IsMine 일때만 -> RoomObjectInstantiate로 만들었기 때문에,
+                // 방장을 인수인계 받은사람이 IsMine이 된다.
+                if (pv.IsMine)
+                {
+                    PhotonNetwork.Destroy(this.gameObject); // 삭제 동기화
+                }
                 yield break; // 코루틴 종료
             }
 
@@ -409,17 +419,36 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
         }
     }
 
-    //PhotonNetwork.Instantiate()로 생성된 네트워크 오브젝트가 생성될 때 자동으로 호출되는 함수
-    //방 기준으로 Awake() 함수 직후 자동으로 호출되는 함수
+    // PhotonNetwork.Instantiate() 또는 PhotonNetwork.InstantiateRoomObject()
+    // 로 생성된 네트워크 오브젝트가 생성될 때 자동으로 호출되는 함수
+    // 방 기준으로 Awake() 함수 직후 자동으로 호출되는 함수
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
+        // 넘어온 데이터가 있는지 확인
         Debug.Log("몬스터 네트워크 오브젝트 생성됨");
+        object[] data = info.photonView.InstantiationData;
+        if (data != null && data.Length > 0)
+        {
+            // "아, 나는 3번 스폰 위치 번호 출신이구나!" 하고 이 세계 공통으로 각인됨
+            m_SpawnIdx = (int)data[0];
+        }
     }
 
     
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         Debug.Log("몬스터 네트워크 오브젝트 동기화 처리");
+        // 로컬 플레이어의 위치 정보 송신
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else // 원격 플레이어의 위치 정보 수신
+        {
+            currPos = (Vector3)stream.ReceiveNext();
+            currRot = (Quaternion)stream.ReceiveNext();
+        }
     }
 
 }//public class Monster_Ctrl 

@@ -1025,6 +1025,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 826386084}
+  - component: {fileID: 826386086}
   - component: {fileID: 826386085}
   m_Layer: 0
   m_Name: MonSpawn_Mgr
@@ -1074,6 +1075,19 @@ MonoBehaviour:
   sceneViewId: 6
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &826386086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826386083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5895078e8e245b4fa31b66e9a93a5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpawnPos: []
 --- !u!1 &848273343
 GameObject:
   m_ObjectHideFlags: 0

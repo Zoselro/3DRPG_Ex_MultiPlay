@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monType: 0
   ImgHpbar: {fileID: 6751424228246630230}
+  m_SpawnIdx: -1
   m_CurState: 0
   anim:
     Idle: {fileID: 7400000, guid: baf3baaffd543464f84280c0d8198498, type: 2}
