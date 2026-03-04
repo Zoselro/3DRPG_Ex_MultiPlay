@@ -97,11 +97,28 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
 
     void Update()
     {
-        if (m_CurState == AnimState.die) //죽겄으면...
+        if (!PhotonNetwork.InRoom)
             return;
 
-        MonStateUpdate();
-        MonAnctionUpdate();
+        // 여기서의 pv.IsMine은 InstantiateRoomObject로 생성되었기 때문에
+        // InstantiateRoomObject()로 생성한 객체일 경우에는
+        // pv.IsMine은 PhotonNetwork.IsMasterClient와 동일한 값을 가지게 된다.
+        // InstantiateRoomObject()로 생성한 몬스터는 특정 플레이어의 소유가 아니라 
+        // 방(Room)의 소유가 된다. 따라서 방장인 플레이어가 몬스터의 소유자가 된다.
+        if (pv.IsMine)
+        {
+            if (m_CurState == AnimState.die) //죽었으면...
+                return;
+
+            MonStateUpdate();
+            MonAnctionUpdate();
+        }
+        else // 아바타들 일 경우
+        {
+            Remote_TrUpdate();
+            Remote_Take_Damage();
+            Remote_Animation();
+        }
     }
 
     private void MonStateUpdate()
@@ -120,12 +137,18 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
                 {
                     AI_State = AnimState.attack;
                     m_AggroTarget = players[i].gameObject; //타겟 설정
+
+                    // Player[] playerArr = PhotonNetwork.PlayerList; // PhotonNetwork.PlayerList는 현재 방에 있는 모든 플레이어의 정보를 담고 있는 배열입니다.
+                    // player[0].ActorNumber = PhotonNetwork.LocalPlayer.ActorNumber; // 현재 플레이어의 고유 번호를 가져오는 방법입니다.
+                    // == pv.Owner.ActorNumber; // 현재 게임 오브젝트의 소유자의 고유 번호를 가져오는 방법입니다.
+                    m_AggroTgId = players[i].GetComponent<Hero_Ctrl>().pv.Owner.ActorNumber; //타겟의 고유번호 설정
                     break;
                 }
                 else if(m_CacDist <= m_TraceDist) //추적거리 범위 이내로 들어왔는지 확인
                 {
                     AI_State = AnimState.trace; //몬스터의 상태를 추적으로 설정
                     m_AggroTarget = players[i].gameObject;  //타겟 설정
+                    m_AggroTgId = players[i].GetComponent<Hero_Ctrl>().pv.Owner.ActorNumber; //타겟의 고유번호 설정
                     break;
                 }
             }//for (int i = 0; i < players.Length; i++)
@@ -287,21 +310,25 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
         if (CurHp <= 0.0f)
             return;
 
-        CurHp -= Damage;
-        if(CurHp < 0.0f)
-           CurHp = 0.0f;
+        if (pv.IsMine) // 실제 데미지는 IsMine인 쪽에서만 계산해서 적용하도록 처리, 아니면, 
+        {
+            CurHp -= Damage;
+            if(CurHp < 0.0f)
+               CurHp = 0.0f;
 
-        ImgHpbar.fillAmount = CurHp / MaxHp;
+            ImgHpbar.fillAmount = CurHp / MaxHp;
 
-        m_DieDir = transform.position - Attacker.transform.position; // 공격자에서 몬스터를 향하는 벡터 계산
-        m_DieDir.y = 0.0f; // 수평 방향으로만 이동하도록 y축 성분 제거
-        m_DieDir.Normalize();
+            m_DieDir = transform.position - Attacker.transform.position; // 공격자에서 몬스터를 향하는 벡터 계산
+            m_DieDir.y = 0.0f; // 수평 방향으로만 이동하도록 y축 성분 제거
+            m_DieDir.Normalize();
+        }
 
         Vector3 cacPos = this.transform.position;
         cacPos.y += 2.65f;
         GameMgr.Inst.SpawnDText_W((int)Damage, cacPos);
 
-        if(CurHp <= 0.0f) //사망처리
+        if(pv.IsMine) // 사망처리는 IsMine인 쪽에서만 처리하도록 나머지는 동기화로 처리
+            if (CurHp <= 0.0f) //사망처리
         {
             // Destroy(gameObject);
             MyChnageAnim(AnimState.die, 0.1f); // 사망 애니메이션 재생
@@ -312,22 +339,56 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
 
     public void Event_AttHit() //공격 애니에니션에서 데미지가 들어가는 시점에 호출되는 함수
     {
-        if (m_AggroTarget == null)
-            return;
+        if (pv.IsMine)
+        {
+            if (m_AggroTarget == null)
+                return;
 
-        Vector3 distVec = m_AggroTarget.transform.position - transform.position;
-        float cacLen = distVec.magnitude;
-        distVec.y = 0.0f;
+            Vector3 distVec = m_AggroTarget.transform.position - transform.position;
+            float cacLen = distVec.magnitude;
+            distVec.y = 0.0f;
 
-        //공격각도 안에 있는 경우
-        if (Vector3.Dot(transform.forward, distVec.normalized) < 0.0f)
-            return;  //90도를 넘는 범위에 있다는 뜻
+            //공격각도 안에 있는 경우
+            if (Vector3.Dot(transform.forward, distVec.normalized) < 0.0f)
+                return;  //90도를 넘는 범위에 있다는 뜻
 
-        if ((m_AttackDist + 1.7f) < cacLen)
-            return;
+            if ((m_AttackDist + 1.7f) < cacLen)
+                return;
 
-        m_AggroTarget.GetComponent<Hero_Ctrl>().TakeDamage(10);
+            m_AggroTarget.GetComponent<Hero_Ctrl>().TakeDamage(10);
+        }
+        else
+        {
+            if (m_AggroTgId < 0)
+                return;
+            GameObject AggroTg = null;
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            for(int i = 0; i < players.Length; i++)
+            {
+                if(m_AggroTgId == players[i].GetComponent<Hero_Ctrl>().pv.Owner.ActorNumber)
+                {
+                    AggroTg = players[i].gameObject;
+                    break;
+                }
+            }
 
+            if(AggroTg == null)
+                return;
+
+            Vector3 distVec = AggroTg.transform.position - transform.position;
+            float canLen = distVec.magnitude;
+            distVec.y = 0.0f;
+
+            // 공격 각도 안에 있는 경우
+            if(Vector3.Dot(transform.forward, distVec.normalized) < 0.0f)
+                return;  //90도를 넘는 범위에 있다는 뜻
+
+            // 공격 범위 밖에 있는 경우
+            if ((m_AttackDist + 1.7f) < canLen)
+                return;
+
+            AggroTg.GetComponent<Hero_Ctrl>().TakeDamage(10);
+        }
     }//public void Event_AttHit() //공격 애니에니션에서 데미지가 들어가는 시점에 호출되는 함수
 
     void FindDefShader()
@@ -434,7 +495,52 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
         }
     }
 
-    
+    private void Remote_TrUpdate() // 원격지 컴퓨터에서 위치와 회전 동기화 함수
+    {
+        if (5.0f < (transform.position - currPos).magnitude)
+        {
+            transform.position = currPos;
+        }
+        else
+        {
+            // 원격 플레이어의 Monster를 수신 받은 위치까지 부드럽게 이동시킴
+            transform.position = Vector3.Lerp(transform.position, currPos, Time.deltaTime * 10.0f);
+        }
+
+        // 원격 플레이어의 Monster를 수신 받은 회전까지 부드럽게 회전시킴
+        transform.rotation = Quaternion.Slerp(transform.rotation, currRot, Time.deltaTime * 10.0f);
+    }
+
+    private void Remote_Take_Damage() // 원격지 컴퓨터에서 hp 동기화 함수
+    {
+        if(0.0f < CurHp)
+        {
+            CurHp = NetHp; // 원격 플레이어의 Monster의 hp를 수신 받은 hp로 업데이트
+            ImgHpbar.fillAmount = CurHp / (float)MaxHp; // hp 바 업데이트
+
+            if(CurHp <= 0.0f)
+            {
+                CurHp = 0.0f;
+                // 사망 연출
+                // 실제 삭제는 PhotonNetwork.Destroy(this.gameObject); 함수에 의해 삭제 동기화 됨
+
+                //MyChnageAnim(AnimState.die, 0.1f); // 사망 애니메이션 재생
+                FindDefShader();
+                StartCoroutine("DieDirDirection"); // 사망 연출을 위한 코루틴 시작
+            }
+        }
+        else
+        {
+            CurHp = NetHp; // 원격 플레이어의 Monster의 hp를 수신 받은 hp로 업데이트
+            ImgHpbar.fillAmount = CurHp / (float)MaxHp; // hp 바 업데이트
+        }
+    }
+
+    private void Remote_Animation() // 원격지 컴퓨터에서 애니메이션 동기화 함수
+    {
+        MyChnageAnim(m_CurState, 0.12f);
+    }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         Debug.Log("몬스터 네트워크 오브젝트 동기화 처리");
@@ -443,11 +549,29 @@ public class Monster_Ctrl : MonoBehaviourPunCallbacks, IPunObservable, IPunInsta
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
+            stream.SendNext(CurHp);
+            stream.SendNext(m_DieDir); // Hp 중계할 때마다 얻어 맞은 방향도 같이 중계해줌.
+            stream.SendNext(m_AggroTgId);
+            stream.SendNext((int)m_CurState);
         }
         else // 원격 플레이어의 위치 정보 수신
         {
             currPos = (Vector3)stream.ReceiveNext();
             currRot = (Quaternion)stream.ReceiveNext();
+            NetHp = (float)stream.ReceiveNext();
+            m_DieDir = (Vector3)stream.ReceiveNext(); // Hp 중계할 때마다 얻어 맞은 방향도 같이 수신해줌.
+            m_AggroTgId = (int)stream.ReceiveNext();
+            m_CurState = (AnimState)stream.ReceiveNext();
+
+            if (isFirstUpdate)
+            {
+                // 보간(Lerp) 없이 바로 현재 위치로 강제 이동
+                transform.position = currPos;
+                transform.rotation = currRot;
+
+                // 다음부터는 부드럽게 움직이도록 플래그 끔
+                isFirstUpdate = false;
+            }
         }
     }
 
