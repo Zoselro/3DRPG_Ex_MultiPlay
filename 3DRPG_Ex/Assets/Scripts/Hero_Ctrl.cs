@@ -183,6 +183,11 @@ public class Hero_Ctrl : MonoBehaviourPunCallbacks, IPunObservable
 
     void KeyBDMove()
     {
+        if(GameMgr.Inst.bEnter == true) // 채팅 입력 상태면 키보드 이동 제외
+        {
+            return;
+        }
+
         h = Input.GetAxisRaw("Horizontal"); //화살표키 좌우키를 누르면 -1.0f ~ 1.0f
         v = Input.GetAxisRaw("Vertical");
 

@@ -137,7 +137,7 @@ public class MonSpawn_Mgr : MonoBehaviourPunCallbacks
 
             // double spawnTime = IDLE_STATE or spawnTime == STATE_ACTIVE
             // 몬스터가 살아있다는 뜻이니 아무것도 하지말고 패스! (가장 빠른 탈출)
-            if (spawnTime > 0.0f)
+            if (spawnTime < 0.0f)
                 continue;
 
             // 시간이 되었으면 스폰
@@ -185,7 +185,7 @@ public class MonSpawn_Mgr : MonoBehaviourPunCallbacks
     // 특정 위치의 스폰을 예약하는 함수
     public void ScheduleSpawn(int spawnIdx, float delay)
     {
-        if (spawnIdx > 0 || m_SpawnPos.Count <= spawnIdx)
+        if (spawnIdx < 0 || m_SpawnPos.Count <= spawnIdx)
             return;
 
         // pun2 기준 인게임 상태가 아니거나
