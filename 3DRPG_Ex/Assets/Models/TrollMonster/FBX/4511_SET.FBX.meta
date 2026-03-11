@@ -1,0 +1,983 @@
+fileFormatVersion: 2
+guid: 8ee35327dd9143f40aa8211b29519feb
+timeCreated: 1477565156
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: EffectDummy
+    100004: skirt_b
+    100006: skirt_f
+    100008: skull
+    100010: stomach
+    100012: Troll
+    100014: Troll 1
+    100016: Troll Head
+    100018: Troll HeadNub
+    100020: Troll L Calf
+    100022: Troll L Clavicle
+    100024: Troll L Clavicle_Bone
+    100026: Troll L Finger0
+    100028: Troll L Finger01
+    100030: Troll L Finger0Nub
+    100032: Troll L Finger1
+    100034: Troll L Finger11
+    100036: Troll L Finger1Nub
+    100038: Troll L Finger2
+    100040: Troll L Finger21
+    100042: Troll L Finger2Nub
+    100044: Troll L Finger3
+    100046: Troll L Finger31
+    100048: Troll L Finger3Nub
+    100050: Troll L Foot
+    100052: Troll L Forearm
+    100054: Troll L Hand
+    100056: Troll L Thigh
+    100058: Troll L Toe0
+    100060: Troll L Toe0Nub
+    100062: Troll L UpperArm
+    100064: Troll Neck
+    100066: Troll Pelvis
+    100068: Troll Ponytail1
+    100070: Troll Ponytail1Nub
+    100072: Troll Prop1
+    100074: Troll R Calf
+    100076: Troll R Clavicle
+    100078: Troll R Clavicle_Bone
+    100080: Troll R Finger0
+    100082: Troll R Finger01
+    100084: Troll R Finger0Nub
+    100086: Troll R Finger1
+    100088: Troll R Finger11
+    100090: Troll R Finger1Nub
+    100092: Troll R Finger2
+    100094: Troll R Finger21
+    100096: Troll R Finger2Nub
+    100098: Troll R Finger3
+    100100: Troll R Finger31
+    100102: Troll R Finger3Nub
+    100104: Troll R Foot
+    100106: Troll R Forearm
+    100108: Troll R Hand
+    100110: Troll R Thigh
+    100112: Troll R Toe0
+    100114: Troll R Toe0Nub
+    100116: Troll R UpperArm
+    100118: Troll Spine
+    100120: Troll Spine1
+    100122: Troll Spine2
+    100124: Troll_Add_Armor
+    100126: Troll_Armor_Body
+    100128: Troll_Armor_L_Forearm
+    100130: Troll_Armor_L_Shoulder
+    100132: Troll_Armor_L_Tigh
+    100134: Troll_Armor_R_Forearm
+    100136: Troll_Armor_R_Shoulder
+    100138: Troll_Armor_R_Tigh
+    100140: Troll_Weapon
+    100142: Troll_Body
+    100144: 4511_Body_Dummy
+    100146: 4511_Head_Dummy
+    100148: 4511_L_Calf_Dummy001
+    100150: 4511_L_ForerArm_Dummy
+    100152: 4511_L_Tigh_Dummy
+    100154: 4511_L_UpperArm_Dummy
+    100156: 4511_R_Calf_Dummy
+    100158: 4511_R_ForerArm_Dummy
+    100160: 4511_R_Tigh_Dummy
+    100162: 4511_R_UpperArm_Dummy
+    100164: Cha_Pos
+    100166: Particle View 001
+    400000: //RootNode
+    400002: EffectDummy
+    400004: skirt_b
+    400006: skirt_f
+    400008: skull
+    400010: stomach
+    400012: Troll
+    400014: Troll 1
+    400016: Troll Head
+    400018: Troll HeadNub
+    400020: Troll L Calf
+    400022: Troll L Clavicle
+    400024: Troll L Clavicle_Bone
+    400026: Troll L Finger0
+    400028: Troll L Finger01
+    400030: Troll L Finger0Nub
+    400032: Troll L Finger1
+    400034: Troll L Finger11
+    400036: Troll L Finger1Nub
+    400038: Troll L Finger2
+    400040: Troll L Finger21
+    400042: Troll L Finger2Nub
+    400044: Troll L Finger3
+    400046: Troll L Finger31
+    400048: Troll L Finger3Nub
+    400050: Troll L Foot
+    400052: Troll L Forearm
+    400054: Troll L Hand
+    400056: Troll L Thigh
+    400058: Troll L Toe0
+    400060: Troll L Toe0Nub
+    400062: Troll L UpperArm
+    400064: Troll Neck
+    400066: Troll Pelvis
+    400068: Troll Ponytail1
+    400070: Troll Ponytail1Nub
+    400072: Troll Prop1
+    400074: Troll R Calf
+    400076: Troll R Clavicle
+    400078: Troll R Clavicle_Bone
+    400080: Troll R Finger0
+    400082: Troll R Finger01
+    400084: Troll R Finger0Nub
+    400086: Troll R Finger1
+    400088: Troll R Finger11
+    400090: Troll R Finger1Nub
+    400092: Troll R Finger2
+    400094: Troll R Finger21
+    400096: Troll R Finger2Nub
+    400098: Troll R Finger3
+    400100: Troll R Finger31
+    400102: Troll R Finger3Nub
+    400104: Troll R Foot
+    400106: Troll R Forearm
+    400108: Troll R Hand
+    400110: Troll R Thigh
+    400112: Troll R Toe0
+    400114: Troll R Toe0Nub
+    400116: Troll R UpperArm
+    400118: Troll Spine
+    400120: Troll Spine1
+    400122: Troll Spine2
+    400124: Troll_Add_Armor
+    400126: Troll_Armor_Body
+    400128: Troll_Armor_L_Forearm
+    400130: Troll_Armor_L_Shoulder
+    400132: Troll_Armor_L_Tigh
+    400134: Troll_Armor_R_Forearm
+    400136: Troll_Armor_R_Shoulder
+    400138: Troll_Armor_R_Tigh
+    400140: Troll_Weapon
+    400142: Troll_Body
+    400144: 4511_Body_Dummy
+    400146: 4511_Head_Dummy
+    400148: 4511_L_Calf_Dummy001
+    400150: 4511_L_ForerArm_Dummy
+    400152: 4511_L_Tigh_Dummy
+    400154: 4511_L_UpperArm_Dummy
+    400156: 4511_R_Calf_Dummy
+    400158: 4511_R_ForerArm_Dummy
+    400160: 4511_R_Tigh_Dummy
+    400162: 4511_R_UpperArm_Dummy
+    400164: Cha_Pos
+    400166: Particle View 001
+    4300000: Troll
+    4300002: Troll_Weapon
+    4300004: Troll_Armor_L_Shoulder
+    4300006: Troll_Armor_R_Shoulder
+    4300008: Troll_Armor_L_Forearm
+    4300010: Troll_Armor_R_Forearm
+    4300012: Troll_Armor_L_Tigh
+    4300014: Troll_Armor_R_Tigh
+    4300016: Troll_Armor_Body
+    4300018: Troll_Body
+    9500000: //RootNode
+    13700000: Troll
+    13700002: Troll_Armor_Body
+    13700004: Troll_Armor_L_Forearm
+    13700006: Troll_Armor_L_Shoulder
+    13700008: Troll_Armor_L_Tigh
+    13700010: Troll_Armor_R_Forearm
+    13700012: Troll_Armor_R_Shoulder
+    13700014: Troll_Armor_R_Tigh
+    13700016: Troll_Weapon
+    13700018: Troll_Body
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: Troll
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Thigh
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Thigh
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Calf
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Calf
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Foot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Foot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll Spine1
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll Spine2
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Clavicle
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Clavicle
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L UpperArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R UpperArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Forearm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Forearm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Hand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Hand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Toe0
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Toe0
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Finger0
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Finger01
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Finger1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Finger11
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Finger2
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Finger21
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Finger0
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Finger01
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Finger1
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Finger11
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Finger2
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Finger21
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Finger3
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll L Finger31
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Finger3
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll R Finger31
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Troll Ponytail1
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: 4511_SET(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Cha_Pos
+      position: {x: -0, y: 0.9396588, z: 3.0361278}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 2.6031375}
+      transformModified: 1
+    - name: Particle View 001
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll_Add_Armor
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll_Armor_Body
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll_Armor_L_Forearm
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll_Armor_L_Shoulder
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll_Armor_L_Tigh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll_Armor_R_Forearm
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll_Armor_R_Shoulder
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll_Armor_R_Tigh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll_Weapon
+      position: {x: 1.9093767, y: 0.9355981, z: -0.09626808}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll
+      position: {x: 0.00000013864823, y: 1.3201839, z: -0.15104142}
+      rotation: {x: -0.4255512, y: 0.4255506, z: 0.56471765, w: 0.5647185}
+      scale: {x: 1.0000013, y: 1.0000014, z: 1.0000013}
+      transformModified: 1
+    - name: Troll Pelvis
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.49999928, y: -0.5, z: -0.5, w: -0.50000066}
+      scale: {x: 1.0000013, y: 1.0000007, z: 1}
+      transformModified: 1
+    - name: skull
+      position: {x: -0.09270561, y: 0.27979198, z: -0.49530032}
+      rotation: {x: -0.080389865, y: 0.1499759, z: 0.925822, w: -0.33748826}
+      scale: {x: 1.0000018, y: 1.0000019, z: 1.0000012}
+      transformModified: 1
+    - name: skirt_b
+      position: {x: -0.10405311, y: -0.35910812, z: 0.00000137}
+      rotation: {x: -0.12560694, y: 0.99208015, z: -0.0000011920929, w: -0.00000086426735}
+      scale: {x: 1.0000018, y: 1.000001, z: 1.0000031}
+      transformModified: 1
+    - name: skirt_f
+      position: {x: 0.12083412, y: 0.49054214, z: -0.0000013732913}
+      rotation: {x: -0.10904828, y: 0.99403644, z: -0.0000013113021, w: -0.00000081956375}
+      scale: {x: 0.99999994, y: 1.0000007, z: 0.99999964}
+      transformModified: 1
+    - name: Troll L Thigh
+      position: {x: 0.0000003814697, y: 0.0000005340576, z: 0.31554094}
+      rotation: {x: -0.23344752, y: 0.9694886, z: 0.04506713, w: 0.05969149}
+      scale: {x: 1.0000018, y: 1.0000013, z: 1.000003}
+      transformModified: 1
+    - name: 4511_L_Tigh_Dummy
+      position: {x: -0.2559368, y: -0.00032227515, z: -0.007952423}
+      rotation: {x: 0.0000000014130451, y: -0.00000000452813, z: -0.00000001811252,
+        w: 1}
+      scale: {x: 1.645399, y: 1.318178, z: 1.3372431}
+      transformModified: 1
+    - name: Troll L Calf
+      position: {x: -0.5438464, y: 0.000000009536743, z: 0}
+      rotation: {x: -0, y: -0, z: 0.15105535, w: 0.9885254}
+      scale: {x: 0.9999999, y: 1.0000008, z: 0.9999997}
+      transformModified: 1
+    - name: 4511_L_Calf_Dummy001
+      position: {x: -0.25006646, y: -0.02260026, z: 0.029446105}
+      rotation: {x: 0.00000032005477, y: -0.00000012225951, z: -0.000000004528091,
+        w: 1}
+      scale: {x: 1.6453989, y: 1.3181779, z: 1.3372433}
+      transformModified: 1
+    - name: Troll L Foot
+      position: {x: -0.5324546, y: -0.000000009536743, z: 0.000000038146972}
+      rotation: {x: -0.0010925698, y: 0.06165725, z: -0.051936567, w: 0.99674463}
+      scale: {x: 0.9999997, y: 1.0000007, z: 0.9999999}
+      transformModified: 1
+    - name: Troll L Toe0
+      position: {x: -0.24946734, y: 0.31315804, z: 0}
+      rotation: {x: -0.000014401447, y: 0.000014308838, z: -0.70726025, w: 0.7069534}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000002}
+      transformModified: 1
+    - name: Troll L Toe0Nub
+      position: {x: -0.31668764, y: 0, z: -0.000000038146972}
+      rotation: {x: 0.0000000013468727, y: -1.959966e-20, z: 1, w: 1.4551976e-11}
+      scale: {x: -1.0000001, y: -1.0000001, z: -1}
+      transformModified: 1
+    - name: Troll R Thigh
+      position: {x: -0.00000045776366, y: -0.0000003814697, z: -0.31554094}
+      rotation: {x: -0.23344737, y: 0.9694885, z: -0.04506822, w: -0.059693232}
+      scale: {x: 1.0000024, y: 1.0000012, z: 1.0000027}
+      transformModified: 1
+    - name: 4511_R_Tigh_Dummy
+      position: {x: -0.2559364, y: -0.00032316206, z: 0.007952805}
+      rotation: {x: 0.00000043017266, y: -0.0000011473925, z: 1, w: -0.00000024451856}
+      scale: {x: -1.6453989, y: -1.3181783, z: -1.3372431}
+      transformModified: 1
+    - name: Troll R Calf
+      position: {x: -0.5438464, y: 0.000000019073486, z: 0}
+      rotation: {x: -0.00000010710208, y: -0.0000000037252899, z: 0.15105516, w: 0.9885254}
+      scale: {x: 0.9999995, y: 0.9999999, z: 0.9999996}
+      transformModified: 1
+    - name: 4511_R_Calf_Dummy
+      position: {x: -0.2500662, y: -0.022601195, z: -0.029445685}
+      rotation: {x: 0.00000019923807, y: -0.0000009135339, z: 1, w: -0.00000023999087}
+      scale: {x: -1.6453983, y: -1.3181778, z: -1.3372432}
+      transformModified: 1
+    - name: Troll R Foot
+      position: {x: -0.53245467, y: 0, z: -0.000000038146972}
+      rotation: {x: 0.0010927077, y: -0.061656903, z: -0.051936544, w: 0.9967447}
+      scale: {x: 0.9999985, y: 0.9999999, z: 0.9999995}
+      transformModified: 1
+    - name: Troll R Toe0
+      position: {x: -0.24946733, y: 0.31315798, z: -0.000000038146972}
+      rotation: {x: 0.000014599875, y: -0.0000146180355, z: -0.7072601, w: 0.70695347}
+      scale: {x: 1.0000007, y: 1.0000004, z: 1.0000008}
+      transformModified: 1
+    - name: Troll R Toe0Nub
+      position: {x: -0.31668764, y: 0, z: 0.000000038146972}
+      rotation: {x: 2.1953692e-20, y: -0.0000000015086463, z: 1.45519135e-11, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+      transformModified: 1
+    - name: Troll Spine
+      position: {x: -0.19267845, y: -0.00031066893, z: 0.0000002676621}
+      rotation: {x: 0.0000020414589, y: -0.0000005960464, z: -0.065751545, w: -0.997836}
+      scale: {x: 1.0000019, y: 1.0000015, z: 1.000003}
+      transformModified: 1
+    - name: stomach
+      position: {x: -0.09244903, y: 0.27612936, z: 0.0000006103516}
+      rotation: {x: 0.4839727, y: -0.8750831, z: -0.00000059604645, w: -0.00000020861626}
+      scale: {x: 0.9999995, y: 0.9999993, z: 0.99999917}
+      transformModified: 1
+    - name: Troll Spine1
+      position: {x: -0.39349136, y: -0.00028394698, z: -7.693961e-10}
+      rotation: {x: -0, y: 0.000001013279, z: -0.2348871, w: -0.9720227}
+      scale: {x: 1.0000043, y: 1.0000026, z: 1.0000044}
+      transformModified: 1
+    - name: 4511_Body_Dummy
+      position: {x: -0.3287288, y: 0.009126701, z: 0.00000091552704}
+      rotation: {x: 0.6976234, y: -0.115419686, z: -0.6976234, w: -0.115419686}
+      scale: {x: 1.0931273, y: 1.29144, z: 1.4772352}
+      transformModified: 1
+    - name: Troll Spine2
+      position: {x: -0.40102354, y: -0.0004585266, z: -9.65083e-10}
+      rotation: {x: -0.00000035159098, y: 0.0000007656357, z: -0.13240398, w: 0.99119586}
+      scale: {x: 1.0000014, y: 1.0000036, z: 1.0000019}
+      transformModified: 1
+    - name: Troll L Clavicle
+      position: {x: -0.68998015, y: -0.033891752, z: 0.21356814}
+      rotation: {x: -0.58418554, y: -0.0002340004, z: 0.8116201, w: -0.00032217847}
+      scale: {x: 0.9999981, y: 0.99999917, z: 0.99999976}
+      transformModified: 1
+    - name: Troll L Clavicle_Bone
+      position: {x: 0.014158783, y: -0.038027115, z: 0.45061767}
+      rotation: {x: 0.7223099, y: -0.1432409, z: 0.022611825, w: 0.6761947}
+      scale: {x: 1.0000001, y: 1.000001, z: 1.000001}
+      transformModified: 1
+    - name: Troll L UpperArm
+      position: {x: -0.47204062, y: 0, z: 0}
+      rotation: {x: 0.17883368, y: 0.13820614, z: -0.034448978, w: 0.9735147}
+      scale: {x: 0.9999989, y: 0.99999887, z: 0.99999917}
+      transformModified: 1
+    - name: 4511_L_UpperArm_Dummy
+      position: {x: -0.32115677, y: -0.0039959718, z: -0.013100586}
+      rotation: {x: 0.000000057263478, y: -0.0000000144373615, z: -0.000000014437361,
+        w: 1}
+      scale: {x: 2.0642498, y: 1.8215472, z: 1.3737005}
+      transformModified: 1
+    - name: Troll L Forearm
+      position: {x: -0.75987095, y: 0.00000015258789, z: 0}
+      rotation: {x: -0.004210292, y: 0.017921487, z: 0.033395987, w: 0.9992727}
+      scale: {x: 1.0000002, y: 1.0000013, z: 1.0000001}
+      transformModified: 1
+    - name: 4511_L_ForerArm_Dummy
+      position: {x: -0.32427695, y: -0.034944534, z: -0.0062698363}
+      rotation: {x: 0.008816021, y: -0.004969011, z: 0.006806859, w: 0.9999256}
+      scale: {x: 2.1851275, y: 1.8656664, z: 1.4435847}
+      transformModified: 1
+    - name: Troll L Hand
+      position: {x: -0.7483618, y: -0.000000038146972, z: 0}
+      rotation: {x: 0.79685783, y: -0.006788487, z: -0.005137832, w: -0.60410696}
+      scale: {x: 1.0000001, y: 1.0000012, z: 1.0000005}
+      transformModified: 1
+    - name: Troll L Finger3
+      position: {x: -0.4070726, y: 0.0469577, z: 0.17079368}
+      rotation: {x: -0.18733867, y: -0.113907464, z: -0.14779249, w: 0.96441}
+      scale: {x: 1, y: 1.0000004, z: 1.0000007}
+      transformModified: 1
+    - name: Troll L Finger31
+      position: {x: -0.1832962, y: 0.000000076293944, z: -0.00000007152557}
+      rotation: {x: 0.000000014901154, y: -0.00000011920923, z: -0.023669045, w: 0.99971986}
+      scale: {x: 0.99999964, y: 0.9999995, z: 0.99999964}
+      transformModified: 1
+    - name: Troll L Finger3Nub
+      position: {x: -0.17272934, y: 0.000000038146972, z: 0.000000009536743}
+      rotation: {x: 0.0000000037252903, y: -9.3132246e-10, z: 3.4694465e-18, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+      transformModified: 1
+    - name: Troll L Finger2
+      position: {x: -0.42518416, y: 0.027838133, z: 0.004172287}
+      rotation: {x: -0.09013388, y: -0.124198675, z: -0.13299951, w: 0.9791638}
+      scale: {x: 1.0000001, y: 1.0000007, z: 1.0000006}
+      transformModified: 1
+    - name: Troll L Finger21
+      position: {x: -0.22290526, y: 0, z: 0.000000009536743}
+      rotation: {x: -0.00000039488057, y: 0.000000044703462, z: -0.015455134, w: 0.9998806}
+      scale: {x: 1.0000008, y: 1, z: 1.0000008}
+      transformModified: 1
+    - name: Troll L Finger2Nub
+      position: {x: -0.16677383, y: 0, z: -0.000000009536743}
+      rotation: {x: 4.065758e-20, y: -5.820766e-11, z: 6.9849193e-10, w: 1}
+      scale: {x: 1, y: 1, z: 1.0000001}
+      transformModified: 1
+    - name: Troll L Finger1
+      position: {x: -0.4001924, y: 0.04931091, z: -0.13602753}
+      rotation: {x: 0.046810433, y: -0.1421229, z: -0.115093045, w: 0.9820201}
+      scale: {x: 1, y: 1.0000004, z: 1}
+      transformModified: 1
+    - name: Troll L Finger11
+      position: {x: -0.1886708, y: 0.00000015258789, z: 0}
+      rotation: {x: -0.0000001713633, y: 0.00000016391272, z: -0.024189357, w: 0.99970746}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000001}
+      transformModified: 1
+    - name: Troll L Finger1Nub
+      position: {x: -0.17272918, y: -0.000000038146972, z: 0.000000019073486}
+      rotation: {x: -0.0000000074505797, y: 0, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+      transformModified: 1
+    - name: Troll L Finger0
+      position: {x: -0.067132264, y: 0.12655197, z: -0.17268446}
+      rotation: {x: -0.5853736, y: 0.22333153, z: -0.085472375, w: -0.77469695}
+      scale: {x: 0.9999995, y: 1.0000006, z: 1.0000004}
+      transformModified: 1
+    - name: Troll L Finger01
+      position: {x: -0.20383148, y: 0, z: -0.000000076293944}
+      rotation: {x: -0.00000014901151, y: 0.0000003576276, z: -0.028664092, w: 0.9995891}
+      scale: {x: 1.0000007, y: 1.0000005, z: 1.0000004}
+      transformModified: 1
+    - name: Troll L Finger0Nub
+      position: {x: -0.17042473, y: 0, z: 0.000000038146972}
+      rotation: {x: -0.000000015832482, y: 0.000000014901159, z: 0.0000000018626451,
+        w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+      transformModified: 1
+    - name: Troll Neck
+      position: {x: -0.8555029, y: 0.27933985, z: 0.0000011426631}
+      rotation: {x: 0.00000015389465, y: 0.0000010008404, z: -0.25771874, w: 0.96622}
+      scale: {x: 0.9999999, y: 1.000002, z: 0.9999993}
+      transformModified: 1
+    - name: Troll Head
+      position: {x: -0.19595176, y: 0.00000030517577, z: 0}
+      rotation: {x: -0.000000045381515, y: 0.0000004774692, z: -0.033784773, w: 0.9994292}
+      scale: {x: 1.0000014, y: 1.0000007, z: 1.0000011}
+      transformModified: 1
+    - name: 4511_Head_Dummy
+      position: {x: -0.2224353, y: 0.031230468, z: 0}
+      rotation: {x: 0.5559567, y: 0.43693492, z: -0.5559567, w: 0.43693492}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+      transformModified: 1
+    - name: EffectDummy
+      position: {x: -0.4270717, y: -0.12964416, z: 0.1934451}
+      rotation: {x: 0.55842584, y: 0.43377486, z: -0.55842584, w: 0.43377486}
+      scale: {x: 2.499625, y: 2.4996252, z: 2.499625}
+      transformModified: 1
+    - name: Troll HeadNub
+      position: {x: -0.4814975, y: 0, z: -5.820766e-13}
+      rotation: {x: 0, y: -2.842171e-14, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Troll Ponytail1
+      position: {x: -0.018612823, y: 0.21188903, z: -0.0000004903483}
+      rotation: {x: -0.00000004664924, y: 0.0000010529928, z: -0.36711043, w: 0.9301774}
+      scale: {x: 1.0000027, y: 1.0000056, z: 1.0000031}
+      transformModified: 1
+    - name: Troll Ponytail1Nub
+      position: {x: -0.45178595, y: -0.00000030517577, z: 0}
+      rotation: {x: -0.70738816, y: 0.7068253, z: 0.000001011479, w: 0.0000010080543}
+      scale: {x: 1.0000007, y: 1.0000002, z: 1.0000001}
+      transformModified: 1
+    - name: Troll R Clavicle
+      position: {x: -0.68998015, y: -0.03389057, z: -0.21356836}
+      rotation: {x: 0.58418596, y: 0.0002314447, z: 0.8116198, w: -0.00032389845}
+      scale: {x: 1.0000021, y: 1, z: 1.0000006}
+      transformModified: 1
+    - name: Troll R UpperArm
+      position: {x: -0.47204039, y: -0.000000019073486, z: 0}
+      rotation: {x: 0.17883398, y: 0.13820525, z: 0.034449223, w: -0.97351485}
+      scale: {x: 1.0000005, y: 0.99999875, z: 0.9999995}
+      transformModified: 1
+    - name: 4511_R_UpperArm_Dummy
+      position: {x: -0.32115477, y: -0.003994827, z: 0.013103027}
+      rotation: {x: 0.000000057748757, y: -0.0000009898404, z: 1, w: 0.0000007074309}
+      scale: {x: -2.0642495, y: -1.8215468, z: -1.3737003}
+      transformModified: 1
+    - name: Troll R Forearm
+      position: {x: -0.75987077, y: 0, z: 0}
+      rotation: {x: 0.0042105448, y: -0.01792278, z: 0.033397112, w: 0.9992726}
+      scale: {x: 1.0000019, y: 1.0000017, z: 1.0000017}
+      transformModified: 1
+    - name: 4511_R_ForerArm_Dummy
+      position: {x: -0.32427475, y: -0.03494232, z: 0.0062713623}
+      rotation: {x: 0.004968613, y: 0.008814589, z: 0.9999257, w: -0.006806045}
+      scale: {x: -2.1851275, y: -1.8656665, z: -1.4435846}
+      transformModified: 1
+    - name: Troll R Hand
+      position: {x: -0.74836165, y: 0, z: 0}
+      rotation: {x: -0.7968577, y: 0.0067885597, z: -0.005137889, w: -0.604107}
+      scale: {x: 1.0000013, y: 1.0000007, z: 1.0000002}
+      transformModified: 1
+    - name: Troll R Finger3
+      position: {x: -0.4070725, y: 0.046957854, z: -0.17079368}
+      rotation: {x: 0.18733811, y: 0.11390588, z: -0.14779277, w: 0.96441025}
+      scale: {x: 1.0000002, y: 0.9999995, z: 1}
+      transformModified: 1
+    - name: Troll R Finger31
+      position: {x: -0.1832962, y: 0.000000076293944, z: -0.0000000047683715}
+      rotation: {x: -0.00000022351733, y: -0.0000016689295, z: -0.02366612, w: 0.99972}
+      scale: {x: 1.0000002, y: 0.9999996, z: 0.99999994}
+      transformModified: 1
+    - name: Troll R Finger3Nub
+      position: {x: -0.17272918, y: 0, z: 0.000000038146972}
+      rotation: {x: 0.000000009313225, y: -0.0000000037252896, z: 1, w: -0.000000014901159}
+      scale: {x: -1.0000001, y: -1.0000001, z: -1.0000001}
+      transformModified: 1
+    - name: Troll R Finger2
+      position: {x: -0.42518416, y: 0.027838286, z: -0.004172306}
+      rotation: {x: 0.09013277, y: 0.12419715, z: -0.1330008, w: 0.97916394}
+      scale: {x: 1.0000002, y: 0.9999993, z: 0.9999998}
+      transformModified: 1
+    - name: Troll R Finger21
+      position: {x: -0.22290526, y: 0, z: 0.000000009536743}
+      rotation: {x: -0.00000032037477, y: -0.0000012293451, z: -0.015454874, w: 0.99988055}
+      scale: {x: 1.0000002, y: 0.9999996, z: 0.9999999}
+      transformModified: 1
+    - name: Troll R Finger2Nub
+      position: {x: -0.16677368, y: -0.000000076293944, z: -0.000000009536743}
+      rotation: {x: -0.0000000022118911, y: 1.3543927e-25, z: 1, w: 6.123234e-17}
+      scale: {x: -1, y: -1, z: -1}
+      transformModified: 1
+    - name: Troll R Finger1
+      position: {x: -0.40019232, y: 0.049311064, z: 0.13602751}
+      rotation: {x: -0.046810493, y: 0.14212167, z: -0.115090154, w: 0.9820207}
+      scale: {x: 1.0000006, y: 0.9999999, z: 0.9999999}
+      transformModified: 1
+    - name: Troll R Finger11
+      position: {x: -0.18867065, y: 0.00000015258789, z: 0.000000019073486}
+      rotation: {x: -0.0000008009367, y: 0.0000008940688, z: -0.024195751, w: 0.9997073}
+      scale: {x: 1.0000001, y: 0.9999997, z: 1}
+      transformModified: 1
+    - name: Troll R Finger1Nub
+      position: {x: -0.17272918, y: -0.000000076293944, z: 0}
+      rotation: {x: -0.000000007450581, y: -1.110223e-16, z: 1, w: -0.000000014901161}
+      scale: {x: -1, y: -1.0000001, z: -1}
+      transformModified: 1
+    - name: Troll R Finger0
+      position: {x: -0.06713218, y: 0.12655197, z: 0.17268449}
+      rotation: {x: 0.58537495, y: -0.2233325, z: -0.08547441, w: -0.77469534}
+      scale: {x: 1.0000002, y: 0.99999964, z: 0.9999987}
+      transformModified: 1
+    - name: Troll R Finger01
+      position: {x: -0.20383148, y: -0.000000038146972, z: -0.000000038146972}
+      rotation: {x: 0.00000041723223, y: -0.00000032782532, z: 0.028666759, w: -0.9995891}
+      scale: {x: 1.0000002, y: 1.000001, z: 1.0000012}
+      transformModified: 1
+    - name: Troll R Finger0Nub
+      position: {x: -0.1704248, y: 0.000000038146972, z: 0.000000038146972}
+      rotation: {x: 6.2729766e-25, y: 0.000000010244548, z: 1, w: 6.123234e-17}
+      scale: {x: -1, y: -1, z: -1}
+      transformModified: 1
+    - name: Troll R Clavicle_Bone
+      position: {x: 0.014158935, y: -0.038026523, z: -0.45061737}
+      rotation: {x: -0.14324102, y: -0.7223096, z: -0.6761949, w: 0.022610972}
+      scale: {x: -0.9999999, y: -1.0000015, z: -1.0000038}
+      transformModified: 1
+    - name: Troll Prop1
+      position: {x: 0.0051010894, y: -1.2671573, z: -0.32117796}
+      rotation: {x: 0.000000044703484, y: 0.1391672, z: 0.0000007003546, w: 0.99026895}
+      scale: {x: 1.0000014, y: 1.0000014, z: 1.0000017}
+      transformModified: 1
+    - name: Troll_Body
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 0.99999714, z: 0.99999714}
+      transformModified: 1
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

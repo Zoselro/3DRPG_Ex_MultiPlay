@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 1472916884259705710}
   - component: {fileID: 3700526115204499929}
   - component: {fileID: 4673710397785985679}
+  - component: {fileID: -5340316530313209969}
   m_Layer: 7
   m_Name: Alien_Root
   m_TagString: Enemy
@@ -451,6 +452,28 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!195 &-5340316530313209969
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550424430334978841}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.7
+  m_Speed: 3.5
+  m_Acceleration: 1000
+  avoidancePriority: 51
+  m_AngularSpeed: 1000
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: -0.1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &797728539280780266
 PrefabInstance:
   m_ObjectHideFlags: 0

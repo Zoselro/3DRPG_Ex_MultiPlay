@@ -56,8 +56,8 @@ MonoBehaviour:
   roomName: 
   connectPlayer: 0
   maxPlayers: 0
-  textRoomName: {fileID: 0}
-  textConnectInfo: {fileID: 0}
+  textRoomName: {fileID: 947448288323323913}
+  textConnectInfo: {fileID: 2936442947075780585}
   ReadyState: 
 --- !u!222 &4888153609589584449
 CanvasRenderer:

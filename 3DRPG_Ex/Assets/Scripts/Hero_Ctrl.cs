@@ -92,6 +92,11 @@ public class Hero_Ctrl : MonoBehaviourPunCallbacks, IPunObservable
     // 다른 주인공의 위치가 쭉 밀리면서 보정되는 현상 개선하기 위해 필요한 변수
     bool isFirstUpdate = true;
 
+    //--- 포탈 관련 변수
+    public GameObject m_PortalPrefab = null;
+    float m_PortalTimer = 0.0f;
+    //--- 포탈 관련 변수
+
     void Awake()
     {
         // PhotonView 컴포넌트 찾아놓기
@@ -847,6 +852,12 @@ public class Hero_Ctrl : MonoBehaviourPunCallbacks, IPunObservable
         }//else //if(m_Ratio < 1.0f)
 
     }//void AttachColorUpdate()
+
+    private void SpawnPortal()
+    {
+        // 포탈이 이미 로딩되어 있다면 마지막 스폰에서 7.5초 뒤에 스폰되게 처리
+        // 자기가 연 포탈은 자기만 이동 할 수 있게 구현
+    }
 
     // 0.3프레임당 호출되는 메서드
     // OnPhotonSerializeView : 관찰할 데이터들을 주고받으며 동기화 해주도록 구현할 수 있는 인터페이스

@@ -1,0 +1,1427 @@
+fileFormatVersion: 2
+guid: 207f3f4cb889722408d62a2ba97fdfee
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: -3556623199369399037
+    second: 01_TPose_Cat
+  - first:
+      74: 6343918387192635383
+    second: 02_Idle_Cat
+  - first:
+      74: 3571342698243905472
+    second: 03_Walk_Cat
+  - first:
+      74: 2847248607156383204
+    second: 04_Run_Cat
+  - first:
+      74: -3974764587029644248
+    second: 05_Jump_Cat
+  - first:
+      74: -2487953900750726002
+    second: 06_Greeting_Cat
+  - first:
+      74: -3519055933782080264
+    second: 07_Eat_Cat
+  - first:
+      74: -5802662002682616365
+    second: 08_Sleep01_Cat
+  - first:
+      74: 48275696070295176
+    second: 09_Sleep02_Cat
+  - first:
+      74: -6414365751873392864
+    second: 10_Sleep03_Cat
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_Cat
+    second: {fileID: 2100000, guid: 858865fca7614404facd7ffd46f064f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyeblows_Cat
+    second: {fileID: 2100000, guid: df977122ee7b276488ccaa0f9033f424, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyelids_Cat
+    second: {fileID: 2100000, guid: 0b1602241720bcb42b630672ea03516a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes_Cat
+    second: {fileID: 2100000, guid: 61bae7125a0feed48a3194d37f059471, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mouse_Cat
+    second: {fileID: 2100000, guid: bea9762fde7c17949b2d93706dc8f0f5, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: 01_TPose_Cat
+      takeName: 01_TPose
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 02_Idle_Cat
+      takeName: 02_Idle
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Spine01
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L/Leg02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R/Leg02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L/Arm02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R/Arm02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head/Head_end
+        weight: 0
+      - path: Armature/Root/Spine01/Spine02/Tail01
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07/Tail07_end
+        weight: 0
+      - path: Body_Cat
+        weight: 0
+      - path: Eyeblows_Cat
+        weight: 0
+      - path: Eyelids_Cat
+        weight: 0
+      - path: Eyes_Cat
+        weight: 0
+      - path: Mouse_Cat
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 03_Walk_Cat
+      takeName: 03_Walk
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Spine01
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L/Leg02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R/Leg02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L/Arm02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R/Arm02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head/Head_end
+        weight: 0
+      - path: Armature/Root/Spine01/Spine02/Tail01
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07/Tail07_end
+        weight: 0
+      - path: Body_Cat
+        weight: 0
+      - path: Eyeblows_Cat
+        weight: 0
+      - path: Eyelids_Cat
+        weight: 0
+      - path: Eyes_Cat
+        weight: 0
+      - path: Mouse_Cat
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 04_Run_Cat
+      takeName: 04_Run
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Spine01
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L/Leg02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R/Leg02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L/Arm02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R/Arm02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head/Head_end
+        weight: 0
+      - path: Armature/Root/Spine01/Spine02/Tail01
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07/Tail07_end
+        weight: 0
+      - path: Body_Cat
+        weight: 0
+      - path: Eyeblows_Cat
+        weight: 0
+      - path: Eyelids_Cat
+        weight: 0
+      - path: Eyes_Cat
+        weight: 0
+      - path: Mouse_Cat
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 05_Jump_Cat
+      takeName: 05_Jump
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Spine01
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L/Leg02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R/Leg02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L/Arm02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R/Arm02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head/Head_end
+        weight: 0
+      - path: Armature/Root/Spine01/Spine02/Tail01
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07/Tail07_end
+        weight: 0
+      - path: Body_Cat
+        weight: 0
+      - path: Eyeblows_Cat
+        weight: 0
+      - path: Eyelids_Cat
+        weight: 0
+      - path: Eyes_Cat
+        weight: 0
+      - path: Mouse_Cat
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 06_Greeting_Cat
+      takeName: 06_Greeting
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Spine01
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L/Leg02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R/Leg02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L/Arm02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R/Arm02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head/Head_end
+        weight: 0
+      - path: Armature/Root/Spine01/Spine02/Tail01
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07/Tail07_end
+        weight: 0
+      - path: Body_Cat
+        weight: 0
+      - path: Eyeblows_Cat
+        weight: 0
+      - path: Eyelids_Cat
+        weight: 0
+      - path: Eyes_Cat
+        weight: 0
+      - path: Mouse_Cat
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 07_Eat_Cat
+      takeName: 07_Eat
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Spine01
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L/Leg02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R/Leg02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L/Arm02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R/Arm02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head/Head_end
+        weight: 0
+      - path: Armature/Root/Spine01/Spine02/Tail01
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07/Tail07_end
+        weight: 0
+      - path: Body_Cat
+        weight: 0
+      - path: Eyeblows_Cat
+        weight: 0
+      - path: Eyelids_Cat
+        weight: 0
+      - path: Eyes_Cat
+        weight: 0
+      - path: Mouse_Cat
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 08_Sleep01_Cat
+      takeName: 08_Sleep01
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Spine01
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L/Leg02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R/Leg02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L/Arm02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R/Arm02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head/Head_end
+        weight: 0
+      - path: Armature/Root/Spine01/Spine02/Tail01
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07/Tail07_end
+        weight: 0
+      - path: Body_Cat
+        weight: 0
+      - path: Eyeblows_Cat
+        weight: 0
+      - path: Eyelids_Cat
+        weight: 0
+      - path: Eyes_Cat
+        weight: 0
+      - path: Mouse_Cat
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 09_Sleep02_Cat
+      takeName: 09_Sleep02
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Spine01
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L/Leg02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R/Leg02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L/Arm02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R/Arm02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head/Head_end
+        weight: 0
+      - path: Armature/Root/Spine01/Spine02/Tail01
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07/Tail07_end
+        weight: 0
+      - path: Body_Cat
+        weight: 0
+      - path: Eyeblows_Cat
+        weight: 0
+      - path: Eyelids_Cat
+        weight: 0
+      - path: Eyes_Cat
+        weight: 0
+      - path: Mouse_Cat
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 10_Sleep03_Cat
+      takeName: 10_Sleep03
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Spine01
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_L/Leg02_L/Leg02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Leg01_R/Leg02_R/Leg02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_L/Arm01_L/Arm02_L/Arm02_L_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Shoulder_R/Arm01_R/Arm02_R/Arm02_R_end
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Spine03/Spine04/Head/Head_end
+        weight: 0
+      - path: Armature/Root/Spine01/Spine02/Tail01
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07
+        weight: 1
+      - path: Armature/Root/Spine01/Spine02/Tail01/Tail02/Tail03/Tail04/Tail05/Tail06/Tail07/Tail07_end
+        weight: 0
+      - path: Body_Cat
+        weight: 0
+      - path: Eyeblows_Cat
+        weight: 0
+      - path: Eyelids_Cat
+        weight: 0
+      - path: Eyes_Cat
+        weight: 0
+      - path: Mouse_Cat
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Spine01
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Leg01_L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Leg01_R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Leg02_L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Leg02_R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine02
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine03
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine04
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Shoulder_L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Shoulder_R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Arm01_L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Arm01_R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Arm02_L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Arm02_R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Arm02_L_end
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Arm02_R_end
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Leg02_L_end
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Leg02_R_end
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Cat(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: Cat(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root
+      parentName: Armature
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0.00000011920924, z: -0, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: Spine01
+      parentName: Root
+      position: {x: -7.6127494e-16, y: 0.051224533, z: -0.0000000031930194}
+      rotation: {x: 0.00000017098581, y: -2.1316282e-14, z: -4.0766188e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine02
+      parentName: Spine01
+      position: {x: 1.9852335e-23, y: 0.008191824, z: -1.5543122e-15}
+      rotation: {x: -0.00000024249852, y: -4.6476065e-28, z: 5.781615e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine03
+      parentName: Spine02
+      position: {x: -9.5901505e-23, y: 0.04223254, z: 0}
+      rotation: {x: 0.00000014646454, y: 1.736321e-30, z: -3.4919872e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine04
+      parentName: Spine03
+      position: {x: 9.111924e-23, y: 0.040294707, z: 1.7763568e-15}
+      rotation: {x: -0.00000022307752, y: -3.7123217e-28, z: 5.3185815e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Spine04
+      position: {x: -4.1681643e-22, y: 0.040778384, z: 1.7763568e-15}
+      rotation: {x: 0.00000010609355, y: 1.0552538e-28, z: -2.529467e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head_end
+      parentName: Head
+      position: {x: -0, y: 0.31243885, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Shoulder_L
+      parentName: Spine03
+      position: {x: -0.11029085, y: 0.08501217, z: 0.00000002741066}
+      rotation: {x: -0.49896154, y: 0.499809, z: 0.500189, w: 0.5010383}
+      scale: {x: 0.99999976, y: 0.9999999, z: 0.99999994}
+    - name: Arm01_L
+      parentName: Shoulder_L
+      position: {x: -4.278622e-11, y: 0.010865001, z: -0.000000003779483}
+      rotation: {x: -0.004174461, y: 0.00035757705, z: 0.000008686073, w: 0.99999124}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Arm02_L
+      parentName: Arm01_L
+      position: {x: -8.720413e-12, y: 0.052523125, z: -0.000000009778668}
+      rotation: {x: 0.0022988121, y: -0.00000015040932, z: -0.0000039090423, w: 0.9999974}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Arm02_L_end
+      parentName: Arm02_L
+      position: {x: -0, y: 0.053472307, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Shoulder_R
+      parentName: Spine03
+      position: {x: 0.11029085, y: 0.08501217, z: -0.000000025180107}
+      rotation: {x: -0.49895567, y: -0.49981484, z: -0.5001828, w: 0.50104445}
+      scale: {x: 0.99999976, y: 0.9999999, z: 0.99999994}
+    - name: Arm01_R
+      parentName: Shoulder_R
+      position: {x: 1.4050983e-12, y: 0.010864997, z: -0.000000015072176}
+      rotation: {x: -0.004174479, y: -0.00035757723, z: -0.0000086960445, w: 0.99999124}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Arm02_R
+      parentName: Arm01_R
+      position: {x: 4.740848e-11, y: 0.05252312, z: -0.000000013387418}
+      rotation: {x: 0.0022987945, y: 0.00000015045947, z: 0.000003908974, w: 0.9999974}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Arm02_R_end
+      parentName: Arm02_R
+      position: {x: -0, y: 0.053472307, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail01
+      parentName: Spine02
+      position: {x: -0.000000016686908, y: 0.04830543, z: -0.06998997}
+      rotation: {x: -0.7071067, y: 1.683657e-14, z: 0.00000016858735, w: 0.7071069}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail02
+      parentName: Tail01
+      position: {x: 2.4309168e-16, y: 0.0071469946, z: 0.0000000034055767}
+      rotation: {x: -0.00000002621962, y: -1.7763568e-14, z: -1.506504e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail03
+      parentName: Tail02
+      position: {x: -3.0469477e-16, y: 0.016984481, z: 0.000000007450581}
+      rotation: {x: 1.7763573e-15, y: -3.5527137e-15, z: 5.2939564e-22, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail04
+      parentName: Tail03
+      position: {x: -3.046947e-16, y: 0.016984489, z: 0.000000007450581}
+      rotation: {x: 3.3914405e-22, y: -3.5527137e-15, z: -1.0587913e-22, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail05
+      parentName: Tail04
+      position: {x: -3.046947e-16, y: 0.016984489, z: 0.000000007450581}
+      rotation: {x: 3.3914405e-22, y: -3.5527137e-15, z: -1.0587912e-22, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail06
+      parentName: Tail05
+      position: {x: -3.046947e-16, y: 0.016984481, z: 0.000000007450581}
+      rotation: {x: -0.00000021933502, y: -3.5527137e-15, z: 5.2293534e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail07
+      parentName: Tail06
+      position: {x: -1.1189458e-15, y: 0.01698448, z: 0.0000000040353783}
+      rotation: {x: 0.00000021933506, y: -3.552713e-15, z: -5.2293537e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail07_end
+      parentName: Tail07
+      position: {x: -0, y: 0.016984493, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg01_L
+      parentName: Spine01
+      position: {x: -0.06653367, y: 0.020029657, z: 0.000000008842701}
+      rotation: {x: 0.00000027020508, y: 4.3775807e-20, z: 1, w: 6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg02_L
+      parentName: Leg01_L
+      position: {x: 4.1633363e-16, y: 0.032173853, z: -8.881784e-16}
+      rotation: {x: 0.00000020746023, y: -1.4210851e-14, z: 4.9801868e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg02_L_end
+      parentName: Leg02_L
+      position: {x: -0, y: 0.037585035, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg01_R
+      parentName: Spine01
+      position: {x: 0.06653367, y: 0.020029657, z: -0.00000002288302}
+      rotation: {x: -0.00000003178655, y: -1.1563994e-21, z: 1, w: -6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg02_R
+      parentName: Leg01_R
+      position: {x: 7.34135e-15, y: 0.032173853, z: 8.881784e-16}
+      rotation: {x: 0.00000020746023, y: 1.4210855e-14, z: 4.9422434e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg02_R_end
+      parentName: Leg02_R
+      position: {x: -0, y: 0.037585035, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body_Cat
+      parentName: Cat(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eyeblows_Cat
+      parentName: Cat(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.00000014106499, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eyelids_Cat
+      parentName: Cat(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eyes_Cat
+      parentName: Cat(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mouse_Cat
+      parentName: Cat(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.00000014106499, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

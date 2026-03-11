@@ -1,0 +1,155 @@
+fileFormatVersion: 2
+guid: 9c9292ae86b37cc4e9249f968a4a5756
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Palace_BattleField_01_door_01
+    100004: Palace_BattleField_01_door_02
+    100006: Palace_BattleField_01_floor_01
+    100008: Palace_BattleField_01_floor_02
+    100010: Palace_BattleField_01_prop_01
+    100012: Palace_BattleField_01_wall_01
+    100014: Palace_BattleField_01_wall_02
+    400000: //RootNode
+    400002: Palace_BattleField_01_door_01
+    400004: Palace_BattleField_01_door_02
+    400006: Palace_BattleField_01_floor_01
+    400008: Palace_BattleField_01_floor_02
+    400010: Palace_BattleField_01_prop_01
+    400012: Palace_BattleField_01_wall_01
+    400014: Palace_BattleField_01_wall_02
+    2300000: Palace_BattleField_01_door_01
+    2300002: Palace_BattleField_01_door_02
+    2300004: Palace_BattleField_01_floor_01
+    2300006: Palace_BattleField_01_floor_02
+    2300008: Palace_BattleField_01_prop_01
+    2300010: Palace_BattleField_01_wall_01
+    2300012: Palace_BattleField_01_wall_02
+    3300000: Palace_BattleField_01_door_01
+    3300002: Palace_BattleField_01_door_02
+    3300004: Palace_BattleField_01_floor_01
+    3300006: Palace_BattleField_01_floor_02
+    3300008: Palace_BattleField_01_prop_01
+    3300010: Palace_BattleField_01_wall_01
+    3300012: Palace_BattleField_01_wall_02
+    4300000: Palace_BattleField_01_wall_01
+    4300002: Palace_BattleField_01_wall_02
+    4300004: Palace_BattleField_01_prop_01
+    4300006: Palace_BattleField_01_floor_01
+    4300008: Palace_BattleField_01_floor_02
+    4300010: Palace_BattleField_01_door_01
+    4300012: Palace_BattleField_01_door_02
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Palace_BattleField_01_door
+    second: {fileID: 2100000, guid: 031fe6a0a99581f42aee2b8ae68259d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Palace_BattleField_01_floor_01
+    second: {fileID: 2100000, guid: d3d2748455c78db4b927d18ac9f28cf5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Palace_BattleField_01_floor_02
+    second: {fileID: 2100000, guid: efd7c13ccf1a0be4591a35f290a1eb39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Palace_BattleField_01_prop_01_D
+    second: {fileID: 2100000, guid: 4f5c018fa32c31640b01dc5741c1f4d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Palace_BattleField_01_wall_01
+    second: {fileID: 2100000, guid: f5a54845cda670846a49b825f2878a6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Palace_BattleField_01_wall_02
+    second: {fileID: 2100000, guid: 22777b4e2e6ecf745ae0acc7b1f9f33d, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 2
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.0069999998
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -14,7 +14,20 @@ public class RoomItem : MonoBehaviour
     public Text textConnectInfo;
 
     [HideInInspector] public string ReadyState = ""; // 레디 상태 표시 -> 게임을 시작하거나, 방이 가득 찼을 경우, 표시해주기 위함
-    
+
+    private void Start()
+    {
+        this.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            // 방 입장 시도
+            PhotonInit refPtnInit = FindFirstObjectByType<PhotonInit>();
+            if (refPtnInit != null)
+            {
+                refPtnInit.OnClickRoomItem(roomName);
+            }
+        });
+    }
+
     public void DispRoomData(bool isOpen)
     {
         if (isOpen)
