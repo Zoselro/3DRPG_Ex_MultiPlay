@@ -1,5 +1,7 @@
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 // 동기화의 원칙 : IsMine인 한군대에서 계산한다.
@@ -159,6 +161,15 @@ public class Hero_Ctrl : MonoBehaviourPunCallbacks, IPunObservable
             AttackRotUpdate();
 
             UpdateAnimState(); //<-- idle 애니메이션으로 돌아가야 하는지 감시하는 함수
+
+            if(!GameMgr.Inst.bEnter) // 채팅이 꺼져있을 때
+            {
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    SpawnPortal();
+                    // 원격 네트워크 플레이어의 탱크에 RPC로 원격으로 Fire 함수를 호출
+                }
+            }
 
         }
         else // 원격지 아바타 캐릭터 들은 위치,회전,애니메이션을 따라오게 동기화 처리
@@ -853,10 +864,61 @@ public class Hero_Ctrl : MonoBehaviourPunCallbacks, IPunObservable
 
     }//void AttachColorUpdate()
 
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.name.Contains("Portal_1"))
+        {
+            if (pv.IsMine)
+                GameMgr.Inst.OnExitRoom(); // 룸 나가기
+        }
+    }
+
     private void SpawnPortal()
     {
         // 포탈이 이미 로딩되어 있다면 마지막 스폰에서 7.5초 뒤에 스폰되게 처리
         // 자기가 연 포탈은 자기만 이동 할 수 있게 구현
+        if (0.0f < m_PortalTimer)
+            return;
+
+        if (m_PortalPrefab == null)
+            return;
+
+        GameObject obj = Instantiate(m_PortalPrefab);
+        Vector3 cacPos = Camera.main.transform.forward; // 카메라의 위치를 가져옴
+        cacPos.y = 0.0f;
+        cacPos.Normalize();
+        Vector3 spPos = transform.position + cacPos * 3.0f;
+        spPos.y = 100.0f;
+
+        NavMeshHit hit;
+        if(NavMesh.SamplePosition(spPos, out hit, 200f, NavMesh.AllAreas))
+        {
+            spPos.y = hit.normal.y + 1.1f;
+        }
+
+        obj.transform.position = spPos;
+        pv.RPC("RemoteSpawnPortal", RpcTarget.Others, spPos);
+
+        Destroy(obj, 7.0f);
+        m_PortalTimer = 7.5f;
+    }
+
+    // 다른 PC에서도 소환한 포탈을 볼 수 있도록 하는 메서드
+    [PunRPC]
+    private void RemoteSpawnPortal(Vector3 pos)
+    {
+        if (pv.IsMine)
+            return;
+
+        GameObject obj = Instantiate(m_PortalPrefab);
+        BoxCollider boxCollider = obj.GetComponent<BoxCollider>();
+        if(boxCollider != null)
+        {
+            boxCollider.enabled = false;
+            Destroy(boxCollider);
+        }
+        obj.transform.position = pos;
+        Destroy(obj, 7.0f); // 7초뒤 제거
     }
 
     // 0.3프레임당 호출되는 메서드

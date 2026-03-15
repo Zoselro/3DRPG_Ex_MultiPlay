@@ -44,6 +44,12 @@ public class GameMgr : MonoBehaviourPunCallbacks
     [HideInInspector] public bool bEnter = false;
     List<string> m_MsgList = new List<string>();
 
+    //--- Portal용 변수
+    string m_TargetScene = "VillageScene";
+    string m_RoomName = "_S1B2S1_";
+    bool m_WantsToJoinOrCreateRoom = false; // 포탈을 타고 씬 이동할 때 필요한 변수
+    //---
+
     //--- 싱글턴 패턴을 위한 인스턴스 변수 선언
     public static GameMgr Inst = null;
 
@@ -309,6 +315,12 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Debug.Log("방 나가기 완료! OnLoeftRoom 콜백함수 호출!");
         Time.timeScale = 1.0f; // 일시정지 풀어주기
         SceneManager.LoadScene("PhotonLobby"); // 로비씬으로 이동
+    }
+
+    // 포탈을 타고 방을 빠져나가는 함수
+    public void OnExitRoom()
+    {
+
     }
 
     //채팅 내용을 중계하는 함수
